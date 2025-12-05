@@ -40,7 +40,9 @@ export default function RootLayout({
             {children}
           </div>
         </main>
-        <MobileNav />
+        <Suspense fallback={<div className="md:hidden fixed bottom-0 left-0 right-0 h-20 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border-t border-zinc-100 dark:border-zinc-800 z-50 pb-safe" />}>
+          <MobileNav />
+        </Suspense>
       </StackTheme></StackProvider></body>
     </html>
   );
