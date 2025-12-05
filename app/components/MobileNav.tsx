@@ -1,14 +1,11 @@
 "use client";
 
-import { LayoutGrid, Dumbbell, Clock, LogIn, LogOut } from "lucide-react";
+import { LayoutGrid, Dumbbell, Clock } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useUser } from "@stackframe/stack";
-import { stackClientApp } from "../../stack/client";
 
 export default function MobileNav() {
     const pathname = usePathname();
-    const user = useUser();
 
     const isActive = (path: string) => pathname === path;
 
@@ -42,24 +39,6 @@ export default function MobileNav() {
                     <Clock className="w-6 h-6 mb-1.5 transition-colors" />
                     <span className="text-[10px] tracking-wide font-medium">History</span>
                 </Link>
-                {user ? (
-                    <button
-                        onClick={() => stackClientApp.signOut()}
-                        className="nav-btn group flex flex-col items-center justify-center w-full h-full text-zinc-400 hover:text-[#FF4B00]"
-                    >
-                        <LogOut className="w-6 h-6 mb-1.5 transition-colors" />
-                        <span className="text-[10px] tracking-wide font-medium">Sign Out</span>
-                    </button>
-                ) : (
-                    <Link
-                        href="/handler/sign-in"
-                        className={`nav-btn group flex flex-col items-center justify-center w-full h-full ${isActive("/handler/sign-in") ? "text-[#FF4B00]" : "text-zinc-400 hover:text-[#FF4B00]"
-                            }`}
-                    >
-                        <LogIn className="w-6 h-6 mb-1.5 transition-colors" />
-                        <span className="text-[10px] tracking-wide font-medium">Sign In</span>
-                    </Link>
-                )}
             </div>
         </nav>
     );
