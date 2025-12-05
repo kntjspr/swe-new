@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import { stackClientApp } from "../stack/client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "./components/Sidebar";
@@ -28,15 +31,17 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FAFAFA] dark:bg-zinc-950 text-[#222222] dark:text-zinc-100 h-screen flex overflow-hidden selection:bg-[#FF4B00] selection:text-white bg-noise`}
-      >
-        <Sidebar />
+      ><StackProvider app={stackClientApp}><StackTheme>
+        <Suspense fallback={<aside className="hidden md:flex flex-col w-72 bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-800 h-screen sticky top-0 p-8 shadow-[4px_0_24px_rgba(0,0,0,0.01)] z-10" />}>
+          <Sidebar />
+        </Suspense>
         <main className="flex-1 overflow-y-auto relative">
           <div className="max-w-3xl mx-auto min-h-full pb-32 md:p-10 md:pb-10">
             {children}
           </div>
         </main>
         <MobileNav />
-      </body>
+      </StackTheme></StackProvider></body>
     </html>
   );
 }
