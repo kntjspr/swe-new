@@ -253,14 +253,19 @@ export default function WorkoutDetail({
 
         // Log the workout completion
         try {
-            await fetch("/api/workouts/log", {
+            await fetch("/api/history", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     workoutId: workout?.id,
+                    name: workout?.name,
                     duration: timerSeconds,
-                    progress,
-                    completedAt: new Date().toISOString(),
+                    calories: workout?.estimated_calories, // Use estimated for now, or calculate
+                    muscles: workout?.muscles,
+                    exercises: {
+                        original: workout?.exercises,
+                        progress: progress
+                    },
                 }),
             });
         } catch (err) {
@@ -364,8 +369,8 @@ export default function WorkoutDetail({
                             <button
                                 onClick={toggleTimer}
                                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${isTimerRunning
-                                        ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-600"
-                                        : "bg-[#FF4B00] text-white"
+                                    ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-600"
+                                    : "bg-[#FF4B00] text-white"
                                     }`}
                             >
                                 {isTimerRunning ? (
@@ -463,8 +468,8 @@ export default function WorkoutDetail({
                         <div
                             key={exercise.id}
                             className={`bg-white dark:bg-zinc-900 rounded-2xl border transition-all overflow-hidden shadow-sm ${allSetsComplete
-                                    ? "border-green-300 dark:border-green-700 bg-green-50/50 dark:bg-green-900/10"
-                                    : "border-zinc-100 dark:border-zinc-800"
+                                ? "border-green-300 dark:border-green-700 bg-green-50/50 dark:bg-green-900/10"
+                                : "border-zinc-100 dark:border-zinc-800"
                                 }`}
                         >
                             <button
@@ -478,8 +483,8 @@ export default function WorkoutDetail({
                                 <div className="flex items-center gap-4">
                                     <div
                                         className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition-colors ${allSetsComplete
-                                                ? "bg-green-500 text-white"
-                                                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500"
+                                            ? "bg-green-500 text-white"
+                                            : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500"
                                             }`}
                                     >
                                         {allSetsComplete ? <Check className="w-5 h-5" /> : index + 1}
@@ -516,8 +521,8 @@ export default function WorkoutDetail({
                                                     <div
                                                         key={setIdx}
                                                         className={`flex items-center gap-4 p-3 rounded-xl transition-colors ${isComplete
-                                                                ? "bg-green-50 dark:bg-green-900/20"
-                                                                : "bg-zinc-50 dark:bg-zinc-800"
+                                                            ? "bg-green-50 dark:bg-green-900/20"
+                                                            : "bg-zinc-50 dark:bg-zinc-800"
                                                             }`}
                                                     >
                                                         <button
@@ -525,8 +530,8 @@ export default function WorkoutDetail({
                                                                 toggleSetComplete(exercise.id, setIdx)
                                                             }
                                                             className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${isComplete
-                                                                    ? "bg-green-500 border-green-500 text-white"
-                                                                    : "border-zinc-300 dark:border-zinc-600 hover:border-[#FF4B00]"
+                                                                ? "bg-green-500 border-green-500 text-white"
+                                                                : "border-zinc-300 dark:border-zinc-600 hover:border-[#FF4B00]"
                                                                 }`}
                                                         >
                                                             {isComplete && <Check className="w-4 h-4" />}

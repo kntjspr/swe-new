@@ -14,7 +14,8 @@ import {
     Check,
     AlertCircle,
 } from "lucide-react";
-import MuscleSelector, { type MuscleGroup } from "../components/MuscleSelector";
+import { useRouter } from "next/navigation";
+import MuscleSelector, { type MuscleGroup } from "../../components/MuscleSelector";
 
 type Equipment = "Bodyweight" | "Dumbbells" | "Barbell" | "Cable";
 type Difficulty = "beginner" | "intermediate" | "advanced";
@@ -47,10 +48,10 @@ export default function Generator() {
     const [selectedMuscles, setSelectedMuscles] = useState<Set<MuscleGroup>>(
         new Set()
     );
-    const [duration, setDuration] = useState(45);
     const [selectedEquipment, setSelectedEquipment] = useState<Set<Equipment>>(
         new Set(["Bodyweight"])
     );
+    const [duration, setDuration] = useState<number>(45);
     const [difficulty, setDifficulty] = useState<Difficulty>("intermediate");
     const [isGenerating, setIsGenerating] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
@@ -59,6 +60,7 @@ export default function Generator() {
     const [expandedExercise, setExpandedExercise] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [saveSuccess, setSaveSuccess] = useState(false);
+    const router = useRouter();
 
     const muscleLabels: Record<MuscleGroup, string> = {
         BICEPS: "Biceps",
@@ -159,7 +161,10 @@ export default function Generator() {
             }
 
             setSaveSuccess(true);
-            setTimeout(() => setSaveSuccess(false), 3000);
+            setTimeout(() => {
+                setSaveSuccess(false);
+                router.push("/saved");
+            }, 1000);
         } catch (err) {
             setError(err instanceof Error ? err.message : "Failed to save workout");
         } finally {
@@ -210,8 +215,8 @@ export default function Generator() {
                                             key={level}
                                             onClick={() => setDifficulty(level)}
                                             className={`h-12 px-4 rounded-xl border text-xs font-bold capitalize transition-all ${difficulty === level
-                                                    ? "bg-[#FF4B00] text-white border-[#FF4B00] shadow-lg shadow-[#FF4B00]/25"
-                                                    : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                                                ? "bg-[#FF4B00] text-white border-[#FF4B00] shadow-lg shadow-[#FF4B00]/25"
+                                                : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800"
                                                 }`}
                                         >
                                             {level}
@@ -237,8 +242,8 @@ export default function Generator() {
                                         key={item}
                                         onClick={() => toggleEquipment(item)}
                                         className={`h-12 px-4 rounded-xl border text-xs font-bold transition-all ${selectedEquipment.has(item)
-                                                ? "bg-[#FF4B00] text-white border-[#FF4B00] shadow-lg shadow-[#FF4B00]/25"
-                                                : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                                            ? "bg-[#FF4B00] text-white border-[#FF4B00] shadow-lg shadow-[#FF4B00]/25"
+                                            : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:bg-zinc-50 dark:hover:bg-zinc-800"
                                             }`}
                                     >
                                         {item}
@@ -390,8 +395,8 @@ export default function Generator() {
                             onClick={saveWorkout}
                             disabled={isSaving || saveSuccess}
                             className={`flex-1 flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-sm font-bold transition-all ${saveSuccess
-                                    ? "bg-green-500 text-white"
-                                    : "bg-[#FF4B00] hover:bg-[#E04100] text-white shadow-lg shadow-[#FF4B00]/25"
+                                ? "bg-green-500 text-white"
+                                : "bg-[#FF4B00] hover:bg-[#E04100] text-white shadow-lg shadow-[#FF4B00]/25"
                                 }`}
                         >
                             {isSaving ? (

@@ -71,6 +71,19 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Check for duplicate workout name
+        const existingWorkout = await queryOne<Workout>(
+            `SELECT id FROM workouts WHERE user_id = $1 AND name = $2`,
+            [user.id, name]
+        );
+
+        if (existingWorkout) {
+            return NextResponse.json(
+                { error: "A workout with this name already exists" },
+                { status: 409 }
+            );
+        }
+
         const workout = await queryOne<Workout>(
             `INSERT INTO workouts (user_id, name, muscles, equipment, duration, difficulty, exercises, estimated_calories)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
