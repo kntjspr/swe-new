@@ -1,0 +1,135 @@
+# FitTracker - QA Test Cases 
+
+## AUTHENTICATION
+- Sign in flow works and redirects to dashboard
+- Sign out works and redirects to landing page
+- Protected routes (/dashboard, /generate, /saved, /history) redirect unauthenticated users to landing
+- Session persists across page refreshes
+
+## LANDING PAGE
+- Header shows logo, nav links, and Sign In/Dashboard button based on auth state
+- Hero section has proper spacing from header (not overlapping)
+- Main marquee ("Strength/Endurance/Power/Hypertrophy") scrolls continuously without gaps
+- Footer marquee scrolls in reverse continuously
+- Features grid displays 4 cards in proper layout
+- Responsive on mobile, tablet, desktop
+- Black background covers entire viewport
+
+## DASHBOARD
+- Loads with stats cards (Completed, Calories, Minutes, Coverage)
+- Muscle heatmap highlights trained muscles in orange
+- Recent activity shows last 5 workouts with name, date, duration, muscle tags
+- Empty state shows when no workouts exist
+- Loading spinner displays during data fetch
+
+## GENERATE WORKOUT
+- Muscle selector allows clicking muscle groups (highlights in orange)
+- Equipment toggles work (Bodyweight, Dumbbells, Barbell, Cable) - at least one required
+- Duration slider adjusts 15-120 minutes
+- Difficulty selector works (beginner/intermediate/advanced)
+- Generate button creates workout with exercises
+- Generated workout shows: name, duration, calories, difficulty, exercise list
+- Each exercise shows: name, muscles, sets, reps, rest, equipment, tip
+- Exercise cards expand to show full details
+- Save workout button saves to database with optional custom name
+- Regenerate button creates new workout with same parameters
+- Validation error if no muscles selected
+
+## SAVED WORKOUTS
+- Displays list of saved workout templates
+- Each workout shows: name, muscles, duration, difficulty, action buttons
+- Delete button removes workout from list and database
+- Start button logs workout to history
+- Empty state shows when no saved workouts
+- Muscle tags show up to 3, then "+X more"
+
+## HISTORY
+- Displays list of completed workout logs
+- Each log shows: name, completion date, duration, calories, muscles
+- Dates format as "Today", "Yesterday", "X days ago", or formatted date
+- Empty state shows when no history
+- Logs sorted by date (most recent first)
+
+## SIDEBAR (Desktop)
+- Navigation links work (Dashboard, Generator, Saved, History)
+- Active page highlighted in orange
+- User profile shows avatar, name, sign out button
+- Logo displays at top
+
+## MOBILE
+- Mobile header shows on screens <768px
+- Bottom navigation shows all pages and highlights active
+- Floating "Generate Workout" CTA on dashboard
+- All pages responsive without horizontal scroll
+- Touch interactions work
+
+## STYLING & THEME
+- Consistent orange (#FF4B00), black, monospace font throughout
+- Space Mono font loads correctly
+- Text selection shows orange background with white text
+- Hover states work on buttons, links, cards
+- Smooth transitions on interactions
+
+## API ENDPOINTS
+- GET /api/stats returns workout statistics
+- GET /api/workouts returns saved workouts
+- POST /api/workouts creates new workout
+- DELETE /api/workouts/:id deletes workout
+- POST /api/workouts/generate generates AI workout
+- GET /api/history returns workout logs
+- POST /api/history creates workout log
+- All endpoints return 401 for unauthenticated requests
+- Error responses show user-friendly messages
+
+## DATABASE
+- Data persists across sessions
+- Users only see their own data (user isolation)
+- Muscle groups stored and retrieved correctly as arrays
+
+## PERFORMANCE
+- Pages load within 2-3 seconds
+- npm run build completes successfully with no errors
+- Images use Next.js Image component
+
+## ACCESSIBILITY
+- Keyboard navigation works (Tab, Enter, Space)
+- Sufficient color contrast (WCAG AA)
+- Images have alt text
+
+## EDGE CASES
+- Long workout names (100+ chars) truncate/wrap properly
+- Cannot deselect all equipment (at least one required)
+- Duration slider caps at 120 minutes
+- Concurrent users don't interfere with each other
+
+## ERROR HANDLING
+- Network failures show user-friendly error messages
+- Invalid/corrupted data handled gracefully
+- API timeouts handled with loading states
+
+## SECURITY
+- XSS attacks prevented (scripts sanitized)
+- SQL injection prevented (parameterized queries)
+- Gemini API key only used server-side, never exposed to client
+- Production uses HTTPS
+
+## CRITICAL PATH (Priority Testing)
+1. Sign in → redirects to dashboard
+2. Dashboard loads with stats and heatmap
+3. Navigate to /generate
+4. Select muscles, equipment, duration, difficulty
+5. Generate workout → displays exercises
+6. Save workout → appears in /saved
+7. Start workout from /saved → logs to /history
+8. View history → shows completed workout
+9. Sign out → redirects to landing
+
+## KNOWN FEATURES
+- AI workout generation via Gemini API with heuristic fallback
+- Neon Postgres database for data storage
+- Stack Auth for authentication
+- Next.js 15 App Router
+- Tailwind CSS with custom orange/black/mono theme
+- Responsive design with mobile-first approach
+- SVG muscle selector with interactive highlighting
+- Real-time stats calculation from workout logs
