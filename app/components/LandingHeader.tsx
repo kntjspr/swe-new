@@ -18,7 +18,7 @@ export default function LandingHeader() {
                         className="object-contain"
                     />
                 </div>
-                <span className="font-bold tracking-tighter text-xl uppercase text-white">FitTracker_Pro</span>
+                <span className="font-bold tracking-tighter text-xl uppercase text-white">FitTracker</span>
             </div>
             <nav className="hidden md:flex items-center gap-8 text-sm">
                 <Link href="/dashboard" className="text-white hover:text-[#FF4B00] transition-colors uppercase tracking-widest">Dashboard</Link>
