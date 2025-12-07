@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -10,6 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,11 +37,35 @@ body {
 }
 
 /* Custom Checkbox Logic */
-.custom-checkbox:checked + div {
+.custom-checkbox:checked+div {
   background-color: #FF4B00;
   color: white;
   border-color: #FF4B00;
   box-shadow: 0 4px 12px rgba(255, 75, 0, 0.2);
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: var(--font-space-mono), monospace;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee 20s linear infinite reverse;
 }
 
 /* Range Slider Styling */
@@ -44,6 +74,7 @@ input[type="range"] {
   width: 100%;
   background: transparent;
 }
+
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 20px;
@@ -55,6 +86,7 @@ input[type="range"]::-webkit-slider-thumb {
   border: 2px solid white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
+
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
@@ -67,11 +99,13 @@ input[type="range"]::-webkit-slider-runnable-track {
 .fade-in {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -80,15 +114,20 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* Muscle Interaction Styles */
 .muscle-group {
-  fill: #F4F4F5; /* zinc-100 */
-  stroke: #E4E4E7; /* zinc-200 */
+  fill: #F4F4F5;
+  /* zinc-100 */
+  stroke: #E4E4E7;
+  /* zinc-200 */
   stroke-width: 1.5;
   transition: all 0.2s ease;
   cursor: pointer;
 }
+
 .muscle-group:hover {
-  fill: #E4E4E7; /* zinc-200 */
+  fill: #E4E4E7;
+  /* zinc-200 */
 }
+
 .muscle-group.active {
   fill: #FF4B00;
   stroke: #FF4B00;
@@ -98,11 +137,15 @@ input[type="range"]::-webkit-slider-runnable-track {
 /* Dark mode adjustments for muscles */
 @media (prefers-color-scheme: dark) {
   .muscle-group {
-    fill: #27272a; /* zinc-800 */
-    stroke: #3f3f46; /* zinc-700 */
+    fill: #27272a;
+    /* zinc-800 */
+    stroke: #3f3f46;
+    /* zinc-700 */
   }
+
   .muscle-group:hover {
-    fill: #3f3f46; /* zinc-700 */
+    fill: #3f3f46;
+    /* zinc-700 */
   }
 }
 

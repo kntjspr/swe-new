@@ -10,6 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@stackframe/stack": "^2.8.54",
     "lucide-react": "^0.556.0",
     "next": "16.0.7",

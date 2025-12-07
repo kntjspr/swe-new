@@ -7,6 +7,7 @@ import {
     type Equipment,
     type Difficulty,
 } from "@/lib/exercises";
+import { generateWorkoutWithGemini } from "@/lib/gemini";
 
 export async function POST(request: NextRequest) {
     try {
@@ -48,7 +49,55 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Generate workout
+        // Try generating with AI first
+        try {
+            const prompt = `
+            Create a ${duration} minute ${difficulty} workout for ${muscles.join(", ")} using ${equipment.join(", ")}.
+            Return a JSON object with this structure:
+            {
+                "name": "Creative Workout Name",
+                "description": "Brief description",
+                "exercises": [
+                    {
+                        "name": "Exercise Name",
+                        "sets": 3,
+                        "reps": "8-12",
+                        "restSeconds": 60,
+                        "muscle": "Primary Muscle Worked (one of: ${muscles.join(", ")})",
+                        "equipment": "Equipment needed (one of: ${equipment.join(", ")})",
+                        "instructions": "Brief checking points"
+                    }
+                ]
+            }
+            Ensure the total duration fits ${duration} minutes.
+            `;
+
+            const aiWorkout = await generateWorkoutWithGemini(prompt);
+
+            if (aiWorkout) {
+                // Calculate estimated calories for AI workout (rough estimate)
+                // 5 calories per minute approximately
+                const estimatedCalories = duration * 6;
+
+                return NextResponse.json({
+                    success: true,
+                    workout: {
+                        suggestedName: aiWorkout.name,
+                        muscles,
+                        equipment,
+                        duration,
+                        difficulty,
+                        exercises: aiWorkout.exercises,
+                        estimatedCalories,
+                        estimatedMinutes: aiWorkout.estimatedDuration || duration,
+                    },
+                });
+            }
+        } catch (e) {
+            console.warn("AI generation failed, falling back to heuristics", e);
+        }
+
+        // Fallback to heuristic generation
         const exercises = getExercisesForWorkout(muscles, equipment, difficulty, duration);
         const estimatedCalories = calculateEstimatedCalories(exercises);
         const suggestedName = generateWorkoutName(muscles);

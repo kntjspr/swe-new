@@ -43,8 +43,22 @@ export async function initializeDatabase(): Promise<void> {
       completed_at TIMESTAMP WITH TIME ZONE
     );
 
+    CREATE TABLE IF NOT EXISTS workout_logs (
+      id SERIAL PRIMARY KEY,
+      user_id VARCHAR(255) NOT NULL,
+      workout_id INTEGER REFERENCES workouts(id) ON DELETE SET NULL,
+      name VARCHAR(255) NOT NULL,
+      duration INTEGER NOT NULL,
+      calories INTEGER NOT NULL,
+      muscles TEXT[] NOT NULL,
+      exercises JSONB NOT NULL,
+      completed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    );
+
     CREATE INDEX IF NOT EXISTS idx_workouts_user_id ON workouts(user_id);
     CREATE INDEX IF NOT EXISTS idx_workouts_created_at ON workouts(created_at);
+    CREATE INDEX IF NOT EXISTS idx_workout_logs_user_id ON workout_logs(user_id);
+    CREATE INDEX IF NOT EXISTS idx_workout_logs_completed_at ON workout_logs(completed_at);
   `;
 
     await query(createTableQuery);
