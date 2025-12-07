@@ -29,8 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FAFAFA] dark:bg-zinc-950 text-[#222222] dark:text-zinc-100 h-screen flex overflow-hidden selection:bg-[#FF4B00] selection:text-white bg-noise`}
       ><StackProvider app={stackClientApp}><StackTheme>
         <Suspense fallback={<aside className="hidden md:flex flex-col w-72 bg-white dark:bg-zinc-900 border-r border-zinc-100 dark:border-zinc-800 h-screen sticky top-0 p-8 shadow-[4px_0_24px_rgba(0,0,0,0.01)] z-10" />}>
