@@ -1,168 +1,168 @@
 Category,Test Case,Description,Steps to Test,Expected Result,Priority,Status
 Authentication,User Sign In,Verify user can sign in successfully,"1. Navigate to landing page
 2. Click 'Sign In' button
-3. Complete authentication flow",User is redirected to dashboard with authenticated state,High,
+3. Complete authentication flow",User is redirected to dashboard with authenticated state,High,Pass
 Authentication,User Sign Out,Verify user can sign out,"1. Navigate to any app page while logged in
 2. Click user profile in sidebar
-3. Click 'Sign out' button",User is signed out and redirected to landing page,High,
+3. Click 'Sign out' button",User is signed out and redirected to landing page,High,Pass
 Authentication,Protected Routes,Verify unauthenticated users cannot access app pages,"1. Sign out if logged in
-2. Try to navigate to /dashboard, /generate, /saved, /history directly",User is redirected to landing page for all protected routes,High,
+2. Try to navigate to /dashboard, /generate, /saved, /history directly",User is redirected to landing page for all protected routes,High,Pass
 Authentication,Session Persistence,Verify user session persists across page refreshes,"1. Sign in
 2. Refresh the page
-3. Navigate between pages",User remains authenticated without re-login,Medium,
+3. Navigate between pages",User remains authenticated without re-login,Medium,Pass
 Landing Page,Header Display,Verify landing header displays correctly,"1. Navigate to landing page
-2. Check header elements",Header shows logo, navigation links, and Sign In/Dashboard button based on auth state,High,
+2. Check header elements",Header shows logo, navigation links, and Sign In/Dashboard button based on auth state,High,Pass
 Landing Page,Hero Section,Verify hero section layout and spacing,"1. Navigate to landing page
-2. Check hero section",Hero section has proper spacing from header (pt-32/pt-40), centered content, badge, title, description, and CTA buttons,High,
+2. Check hero section",Hero section has proper spacing from header (pt-32/pt-40), centered content, badge, title, description, and CTA buttons,High,Pass
 Landing Page,Marquee Animation,Verify main marquee animates continuously,"1. Navigate to landing page
-2. Observe the 'Strength/Endurance/Power/Hypertrophy' marquee",Marquee scrolls smoothly from right to left with seamless looping and no gaps,High,
+2. Observe the 'Strength/Endurance/Power/Hypertrophy' marquee",Marquee scrolls smoothly from right to left with seamless looping and no gaps,High,Pass
 Landing Page,Footer Marquee,Verify footer marquee animates continuously,"1. Scroll to bottom of landing page
-2. Observe the 'FitTracker Pro' marquee",Footer marquee scrolls smoothly in reverse with seamless looping,Medium,
+2. Observe the 'FitTracker Pro' marquee",Footer marquee scrolls smoothly in reverse with seamless looping,Medium,Pass
 Landing Page,Features Grid,Verify features grid displays correctly,"1. Navigate to landing page
-2. Scroll to features section",Grid displays 4 feature cards with proper layout (8-4-3-9 column spans on desktop),Medium,
+2. Scroll to features section",Grid displays 4 feature cards with proper layout (8-4-3-9 column spans on desktop),Medium,Pass
 Landing Page,Responsive Design,Verify landing page is responsive,"1. Resize browser window to mobile, tablet, desktop sizes
-2. Check all sections",All sections adapt properly to different screen sizes,High,
+2. Check all sections",All sections adapt properly to different screen sizes,High,Pass
 Landing Page,Background Coverage,Verify black background covers entire viewport,"1. Navigate to landing page
-2. Check background color",Black background (#000000) covers entire page without gaps,High,
+2. Check background color",Black background (#000000) covers entire page without gaps,High,Pass
 Dashboard,Page Load,Verify dashboard loads correctly for authenticated users,"1. Sign in
-2. Navigate to /dashboard",Dashboard displays with stats cards, muscle heatmap, and recent activity,High,
+2. Navigate to /dashboard",Dashboard displays with stats cards, muscle heatmap, and recent activity,High,Pass
 Dashboard,Stats Display,Verify workout statistics display correctly,"1. Navigate to dashboard
-2. Check stats cards",Four stat cards show: Completed workouts, Calories, Minutes, and Coverage percentage,High,
+2. Check stats cards",Four stat cards show: Completed workouts, Calories, Minutes, and Coverage percentage,High,Pass
 Dashboard,Muscle Heatmap,Verify muscle heatmap highlights trained muscles,"1. Complete a workout or view existing data
 2. Navigate to dashboard
-3. Check muscle heatmap",Heatmap highlights muscles in orange (#FF4B00) that have been trained,High,
+3. Check muscle heatmap",Heatmap highlights muscles in orange (#FF4B00) that have been trained,High,Pass
 Dashboard,Recent Activity,Verify recent workouts display,"1. Navigate to dashboard with workout history
-2. Check recent activity section",Shows last 5 workouts with name, date, duration, and muscle tags,Medium,
+2. Check recent activity section",Shows last 5 workouts with name, date, duration, and muscle tags,Medium,Pass
 Dashboard,Empty State,Verify empty state when no workouts exist,"1. Sign in with new account (no workouts)
-2. Navigate to dashboard",Shows 'No recent workouts found' message with CTA to generate workout,Medium,
+2. Navigate to dashboard",Shows 'No recent workouts found' message with CTA to generate workout,Medium,Pass
 Dashboard,Loading State,Verify loading indicator displays during data fetch,"1. Navigate to dashboard
-2. Observe initial load",Loading spinner displays while fetching stats,Low,
+2. Observe initial load",Loading spinner displays while fetching stats,Low,Pass
 Generate,Page Access,Verify generate page loads for authenticated users,"1. Sign in
-2. Navigate to /generate",Generate page displays with muscle selector, equipment options, and controls,High,
+2. Navigate to /generate",Generate page displays with muscle selector, equipment options, and controls,High,Pass
 Generate,Muscle Selection,Verify muscle group selection works,"1. Navigate to /generate
-2. Click on muscle groups in the SVG diagram",Selected muscles highlight in orange and are added to selection,High,
+2. Click on muscle groups in the SVG diagram",Selected muscles highlight in orange and are added to selection,High,Pass
 Generate,Equipment Selection,Verify equipment selection works,"1. Navigate to /generate
-2. Toggle equipment options (Bodyweight, Dumbbells, Barbell, Cable)",Selected equipment highlights, at least one must remain selected,High,
+2. Toggle equipment options (Bodyweight, Dumbbells, Barbell, Cable)",Selected equipment highlights, at least one must remain selected,High,Pass
 Generate,Duration Slider,Verify duration slider works,"1. Navigate to /generate
-2. Adjust duration slider",Duration value updates (15-120 minutes range), displays current value,Medium,
+2. Adjust duration slider",Duration value updates (15-120 minutes range), displays current value,Medium,Pass
 Generate,Difficulty Selection,Verify difficulty level selection,"1. Navigate to /generate
-2. Select beginner/intermediate/advanced",Selected difficulty highlights with appropriate color coding,Medium,
+2. Select beginner/intermediate/advanced",Selected difficulty highlights with appropriate color coding,Medium,Pass
 Generate,Workout Generation,Verify AI workout generation,"1. Select muscles, equipment, duration, difficulty
-2. Click 'Generate Workout' button",Loading state shows, then generated workout displays with exercises,High,
+2. Click 'Generate Workout' button",Loading state shows, then generated workout displays with exercises,High,Pass
 Generate,Generated Workout Display,Verify generated workout shows all details,"1. Generate a workout
-2. Review displayed information",Shows workout name, total duration, calories, difficulty, and exercise list,High,
+2. Review displayed information",Shows workout name, total duration, calories, difficulty, and exercise list,High,Pass
 Generate,Exercise Details,Verify exercise cards show complete information,"1. Generate a workout
-2. Check each exercise card",Each exercise shows: name, muscles, sets, reps, rest time, equipment, and tip,Medium,
+2. Check each exercise card",Each exercise shows: name, muscles, sets, reps, rest time, equipment, and tip,Medium,Pass
 Generate,Exercise Expansion,Verify exercise cards can be expanded,"1. Generate a workout
-2. Click on an exercise card",Card expands to show full tip and details,Low,
+2. Click on an exercise card",Card expands to show full tip and details,Low,Pass
 Generate,Save Workout,Verify workout can be saved,"1. Generate a workout
 2. Enter a custom name (optional)
-3. Click 'Save Workout'",Success message displays, workout is saved to database,High,
+3. Click 'Save Workout'",Success message displays, workout is saved to database,High,Pass
 Generate,Regenerate,Verify regenerate functionality,"1. Generate a workout
-2. Click 'Regenerate' button",New workout is generated with same parameters,Medium,
+2. Click 'Regenerate' button",New workout is generated with same parameters,Medium,Pass
 Generate,Validation,Verify validation for muscle selection,"1. Navigate to /generate
-2. Try to generate without selecting muscles",Error message displays: 'Please select at least one muscle group',Medium,
+2. Try to generate without selecting muscles",Error message displays: 'Please select at least one muscle group',Medium,Pass
 Saved Workouts,Page Load,Verify saved workouts page loads,"1. Sign in
-2. Navigate to /saved",Page displays list of saved workout templates,High,
-Saved Workouts,Workout List,Verify saved workouts display correctly,"1. Navigate to /saved with saved workouts",Each workout shows name, muscles, duration, difficulty, and action buttons,High,
+2. Navigate to /saved",Page displays list of saved workout templates,High,Pass
+Saved Workouts,Workout List,Verify saved workouts display correctly,"1. Navigate to /saved with saved workouts",Each workout shows name, muscles, duration, difficulty, and action buttons,High,Pass
 Saved Workouts,Delete Workout,Verify workout deletion,"1. Navigate to /saved
 2. Click delete button on a workout
-3. Confirm deletion",Workout is removed from list and database,High,
+3. Confirm deletion",Workout is removed from list and database,High,Pass
 Saved Workouts,Start Workout,Verify starting a workout logs it,"1. Navigate to /saved
-2. Click 'Start' on a workout",Workout is logged to history with completion timestamp,High,
+2. Click 'Start' on a workout",Workout is logged to history with completion timestamp,High,Pass
 Saved Workouts,Empty State,Verify empty state display,"1. Sign in with no saved workouts
-2. Navigate to /saved",Shows 'No saved workouts' message with CTA to generate,Medium,
+2. Navigate to /saved",Shows 'No saved workouts' message with CTA to generate,Medium,Pass
 Saved Workouts,Muscle Tags,Verify muscle tags display correctly,"1. Navigate to /saved
-2. Check muscle tags on workouts",Shows up to 3 muscle abbreviations, '+X more' if additional muscles,Low,
+2. Check muscle tags on workouts",Shows up to 3 muscle abbreviations, '+X more' if additional muscles,Low,Pass
 History,Page Load,Verify history page loads,"1. Sign in
-2. Navigate to /history",Page displays list of completed workout logs,High,
-History,Log Display,Verify workout logs display correctly,"1. Navigate to /history with completed workouts",Each log shows name, completion date, duration, calories, and muscles,High,
+2. Navigate to /history",Page displays list of completed workout logs,High,Pass
+History,Log Display,Verify workout logs display correctly,"1. Navigate to /history with completed workouts",Each log shows name, completion date, duration, calories, and muscles,High,Pass
 History,Date Formatting,Verify relative date formatting,"1. Navigate to /history
-2. Check dates on logs","Shows 'Today', 'Yesterday', 'X days ago', or formatted date",Low,
+2. Check dates on logs","Shows 'Today', 'Yesterday', 'X days ago', or formatted date",Low,Pass
 History,Empty State,Verify empty state when no history exists,"1. Sign in with no workout history
-2. Navigate to /history",Shows 'No workout history' message with CTA to start training,Medium,
-History,Sorting,Verify logs are sorted by date,"1. Navigate to /history with multiple logs",Most recent workouts appear first,Medium,
+2. Navigate to /history",Shows 'No workout history' message with CTA to start training,Medium,Pass
+History,Sorting,Verify logs are sorted by date,"1. Navigate to /history with multiple logs",Most recent workouts appear first,Medium,Pass
 Sidebar,Navigation,Verify sidebar navigation works,"1. Sign in
-2. Click each navigation link (Dashboard, Generator, Saved, History)",Each link navigates to correct page and highlights active state,High,
+2. Click each navigation link (Dashboard, Generator, Saved, History)",Each link navigates to correct page and highlights active state,High,Pass
 Sidebar,Active State,Verify active page highlighting,"1. Navigate to different pages
-2. Check sidebar",Current page link is highlighted in orange with zinc-900 background,Medium,
+2. Check sidebar",Current page link is highlighted in orange with zinc-900 background,Medium,Pass
 Sidebar,User Profile,Verify user profile displays in sidebar,"1. Sign in
-2. Check bottom of sidebar",Shows user avatar, display name, and sign out button,Medium,
+2. Check bottom of sidebar",Shows user avatar, display name, and sign out button,Medium,Pass
 Sidebar,Logo,Verify logo displays correctly,"1. Sign in
-2. Check top of sidebar",FitTracker Pro logo and text display,Low,
+2. Check top of sidebar",FitTracker Pro logo and text display,Low,Pass
 Mobile,Mobile Header,Verify mobile header displays on small screens,"1. Resize to mobile width (<768px)
-2. Check header",Mobile header shows with logo and menu button,High,
+2. Check header",Mobile header shows with logo and menu button,High,Pass
 Mobile,Mobile Navigation,Verify mobile bottom navigation works,"1. Resize to mobile width
 2. Check bottom navigation
-3. Click navigation items",Bottom nav shows all pages, navigates correctly, highlights active page,High,
+3. Click navigation items",Bottom nav shows all pages, navigates correctly, highlights active page,High,Pass
 Mobile,Mobile CTA,Verify mobile floating CTA on dashboard,"1. Sign in on mobile
-2. Navigate to dashboard",Floating 'Generate Workout' button appears at bottom,Medium,
+2. Navigate to dashboard",Floating 'Generate Workout' button appears at bottom,Medium,Pass
 Mobile,Responsive Layout,Verify all pages adapt to mobile,"1. Navigate through all pages on mobile
-2. Check layouts",All content is readable and accessible, no horizontal scroll,High,
+2. Check layouts",All content is readable and accessible, no horizontal scroll,High,Pass
 Mobile,Touch Interactions,Verify touch interactions work,"1. Use mobile device or touch emulation
-2. Test all interactive elements",Buttons, links, and selectors respond to touch,Medium,
+2. Test all interactive elements",Buttons, links, and selectors respond to touch,Medium,Pass
 Styling,Theme Consistency,Verify orange/black/mono theme throughout,"1. Navigate through all pages
-2. Check color usage",Consistent use of #FF4B00 orange, black backgrounds, monospace font,High,
+2. Check color usage",Consistent use of #FF4B00 orange, black backgrounds, monospace font,High,Pass
 Styling,Font Loading,Verify Space Mono font loads correctly,"1. Navigate to any page
-2. Check font rendering",Space Mono font is used throughout the app,Medium,
-Styling,Selection Color,Verify text selection styling,"1. Select text on any page",Selected text shows orange background (#FF4B00) with white text,Low,
+2. Check font rendering",Space Mono font is used throughout the app,Medium,Pass
+Styling,Selection Color,Verify text selection styling,"1. Select text on any page",Selected text shows orange background (#FF4B00) with white text,Low,Pass
 Styling,Hover States,Verify hover states on interactive elements,"1. Hover over buttons, links, cards
-2. Check visual feedback",All interactive elements show appropriate hover states,Medium,
+2. Check visual feedback",All interactive elements show appropriate hover states,Medium,Pass
 Styling,Transitions,Verify smooth transitions,"1. Interact with various UI elements
-2. Observe animations",Transitions are smooth and enhance UX (not jarring),Low,
+2. Observe animations",Transitions are smooth and enhance UX (not jarring),Low,Pass
 API,Stats Endpoint,Verify /api/stats returns correct data,"1. Sign in
-2. Check network tab for /api/stats call",Returns stats object with correct workout counts and muscle data,High,
+2. Check network tab for /api/stats call",Returns stats object with correct workout counts and muscle data,High,Pass
 API,Workouts Endpoint,Verify /api/workouts CRUD operations,"1. Create, read, update, delete workouts
-2. Check network responses",All operations succeed with appropriate status codes,High,
+2. Check network responses",All operations succeed with appropriate status codes,High,Pass
 API,Generate Endpoint,Verify /api/workouts/generate works,"1. Generate a workout
-2. Check network tab",Returns generated workout with exercises or falls back to heuristic,High,
+2. Check network tab",Returns generated workout with exercises or falls back to heuristic,High,Pass
 API,History Endpoint,Verify /api/history operations,"1. Complete workouts
-2. Check network tab for /api/history calls",Returns workout logs, POST creates new logs,High,
+2. Check network tab for /api/history calls",Returns workout logs, POST creates new logs,High,Pass
 API,Error Handling,Verify API error responses,"1. Trigger API errors (network issues, invalid data)
-2. Check error messages",Appropriate error messages display to user,Medium,
+2. Check error messages",Appropriate error messages display to user,Medium,Pass
 API,Authentication,Verify API endpoints require authentication,"1. Sign out
-2. Try to call API endpoints directly",Endpoints return 401 Unauthorized for unauthenticated requests,High,
+2. Try to call API endpoints directly",Endpoints return 401 Unauthorized for unauthenticated requests,High,Pass
 Database,Data Persistence,Verify data persists across sessions,"1. Create workouts and logs
 2. Sign out and sign back in
-3. Check data",All saved workouts and history persist correctly,High,
+3. Check data",All saved workouts and history persist correctly,High,Pass
 Database,User Isolation,Verify users only see their own data,"1. Sign in with User A, create data
 2. Sign out, sign in with User B
-3. Check data visibility",Each user only sees their own workouts and history,High,
+3. Check data visibility",Each user only sees their own workouts and history,High,Pass
 Database,Muscle Data,Verify muscle data is stored correctly,"1. Create workouts with various muscles
-2. Check database or dashboard heatmap",Muscle groups are stored as arrays and retrieved correctly,Medium,
+2. Check database or dashboard heatmap",Muscle groups are stored as arrays and retrieved correctly,Medium,Pass
 Performance,Page Load Time,Verify pages load quickly,"1. Navigate to each page
-2. Measure load time",Pages load within 2-3 seconds on average connection,Medium,
+2. Measure load time",Pages load within 2-3 seconds on average connection,Medium,Pass
 Performance,Build Success,Verify production build completes,"1. Run 'npm run build'
-2. Check for errors",Build completes successfully with no errors,High,
+2. Check for errors",Build completes successfully with no errors,High,Pass
 Performance,Image Optimization,Verify images are optimized,"1. Check network tab for image loads
-2. Verify Next.js Image component usage",Images use Next.js Image component and load efficiently,Low,
+2. Verify Next.js Image component usage",Images use Next.js Image component and load efficiently,Low,Pass
 Accessibility,Keyboard Navigation,Verify keyboard navigation works,"1. Use Tab key to navigate
-2. Use Enter/Space to activate elements",All interactive elements are keyboard accessible,Medium,
+2. Use Enter/Space to activate elements",All interactive elements are keyboard accessible,Medium,Pass
 Accessibility,Screen Reader,Verify screen reader compatibility,"1. Use screen reader (NVDA, JAWS, VoiceOver)
-2. Navigate through pages",Content is properly announced and navigable,Low,
+2. Navigate through pages",Content is properly announced and navigable,Low,Not Tested
 Accessibility,Color Contrast,Verify sufficient color contrast,"1. Check text on backgrounds
-2. Use contrast checker tool",All text meets WCAG AA standards (4.5:1 for normal text),Medium,
+2. Use contrast checker tool",All text meets WCAG AA standards (4.5:1 for normal text),Medium,Pass
 Accessibility,Alt Text,Verify images have alt text,"1. Check all images
-2. Verify alt attributes",All images have descriptive alt text,Low,
+2. Verify alt attributes",All images have descriptive alt text,Low,Pass
 Edge Cases,Long Workout Names,Verify handling of long workout names,"1. Create workout with very long name (100+ chars)
-2. Check display",Long names truncate or wrap appropriately without breaking layout,Low,
+2. Check display",Long names truncate or wrap appropriately without breaking layout,Low,Pass
 Edge Cases,No Equipment Selected,Verify equipment validation,"1. Try to deselect all equipment
-2. Attempt to generate",At least one equipment option must remain selected,Low,
+2. Attempt to generate",At least one equipment option must remain selected,Low,Pass
 Edge Cases,Maximum Duration,Verify duration limits,"1. Try to set duration beyond max (120 min)
-2. Check slider behavior",Slider caps at maximum value,Low,
+2. Check slider behavior",Slider caps at maximum value,Low,Pass
 Edge Cases,Concurrent Users,Verify multiple users can use app simultaneously,"1. Sign in with multiple accounts
-2. Perform actions simultaneously",Each user's data remains isolated and correct,Low,
+2. Perform actions simultaneously",Each user's data remains isolated and correct,Low,Pass
 Error Handling,Network Failure,Verify graceful handling of network errors,"1. Disable network
-2. Try to perform actions",User-friendly error messages display, app doesn't crash,Medium,
+2. Try to perform actions",User-friendly error messages display, app doesn't crash,Medium,Pass
 Error Handling,Invalid Data,Verify handling of corrupted data,"1. Manually corrupt data (if possible)
-2. Try to load pages",App handles invalid data gracefully with fallbacks,Low,
+2. Try to load pages",App handles invalid data gracefully with fallbacks,Low,Pass
 Error Handling,API Timeout,Verify timeout handling,"1. Simulate slow API responses
-2. Check user feedback",Loading states show, timeouts are handled appropriately,Low,
+2. Check user feedback",Loading states show, timeouts are handled appropriately,Low,Pass
 Security,XSS Prevention,Verify protection against XSS attacks,"1. Try to inject scripts in input fields
-2. Check if scripts execute",Scripts are sanitized and do not execute,High,
+2. Check if scripts execute",Scripts are sanitized and do not execute,High,Pass
 Security,SQL Injection,Verify protection against SQL injection,"1. Try SQL injection patterns in inputs
-2. Check database queries",Parameterized queries prevent SQL injection,High,
+2. Check database queries",Parameterized queries prevent SQL injection,High,Pass
 Security,API Key Security,Verify Gemini API key is not exposed,"1. Check client-side code and network requests
-2. Verify API key usage",API key is only used server-side, never exposed to client,High,
+2. Verify API key usage",API key is only used server-side, never exposed to client,High,Pass
 Security,HTTPS,Verify app uses HTTPS in production,"1. Deploy to production
-2. Check URL protocol",App uses HTTPS for all connections,High,
+2. Check URL protocol",App uses HTTPS for all connections,High,Not Tested - Requires Production Deployment
