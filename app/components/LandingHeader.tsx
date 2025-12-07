@@ -34,7 +34,7 @@ export default function LandingHeader() {
                 </Link>
             ) : (
                 <Link
-                    href="/dashboard"
+                    href="/handler/sign-in"
                     className="group relative px-6 py-2 bg-white text-black text-sm font-bold uppercase tracking-wider hover:bg-[#FF4B00] hover:text-white transition-colors"
                 >
                     <span className="relative z-10">Sign In</span>
