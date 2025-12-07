@@ -25,7 +25,7 @@ export default function Sidebar() {
           />
         </div>
         <span className="font-bold tracking-tighter text-lg text-white uppercase">
-          FitTracker_Pro
+          FitTracker
         </span>
       </div>
 

@@ -21,7 +21,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FitTracker Pro",
+  title: "FitTracker",
   description: "Transform Your Fitness Journey",
 };
 

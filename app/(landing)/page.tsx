@@ -122,14 +122,14 @@ export default function LandingPage() {
                 <div className="border-t border-white/10 bg-black py-2 overflow-hidden relative">
                     <div className="animate-marquee-reverse whitespace-nowrap flex text-zinc-800 font-mono text-sm uppercase tracking-widest select-none">
                         <div className="flex gap-8 pr-8">
-                            <span>FitTracker Pro</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker Pro</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker Pro</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
                         </div>
                         <div className="flex gap-8 pr-8">
-                            <span>FitTracker Pro</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker Pro</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker Pro</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
                         </div>
                     </div>
                 </div>
