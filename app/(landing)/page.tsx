@@ -72,18 +72,18 @@ export default function LandingPage() {
                             <div className="flex-1 border-b border-zinc-800 p-8 flex flex-col justify-end bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat grayscale hover:grayscale-0 transition-all duration-500">
                                 <div className="bg-black/80 backdrop-blur-sm p-4 border border-zinc-800">
                                     <p className="text-xs text-zinc-400 uppercase mb-1">Latest Update</p>
-                                    <p className="text-white font-bold uppercase">v2.4 Live Now</p>
+                                    <p className="text-white font-bold uppercase">v1.0 Live Now</p>
                                 </div>
                             </div>
 
-                            <div className="h-32 p-4 bg-[#FF4B00] text-black flex items-center justify-between overflow-hidden relative group cursor-pointer">
+                            <Link href="/dashboard" className="h-32 p-4 bg-[#FF4B00] text-black flex items-center justify-between overflow-hidden relative group cursor-pointer">
                                 <span className="absolute -right-4 -bottom-8 text-9xl font-black opacity-10 group-hover:opacity-20 transition-opacity">GO</span>
                                 <div>
                                     <p className="font-bold text-4xl uppercase tracking-tighter">Join Now</p>
                                     <p className="text-sm font-bold uppercase tracking-widest opacity-70">Free Forever</p>
                                 </div>
                                 <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </section>
