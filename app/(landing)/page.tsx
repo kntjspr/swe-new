@@ -218,7 +218,7 @@ export default function LandingPage() {
                         </div>
                         <div className="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                             <p className="text-zinc-600 text-xs font-mono uppercase">
-                                © 2025 FitTracker Ops. All Systems Nominal.
+                                © {new Date().getFullYear()} FitTracker Ops. All Systems Nominal.
                             </p>
                             <div className="flex gap-4">
                                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
