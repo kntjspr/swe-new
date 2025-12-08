@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useUser } from "@stackframe/stack";
 import LandingHeader from "../components/LandingHeader";
-import { ArrowRight, Smartphone, Shield, Star, Plus, Minus, Hash } from "lucide-react";
+import { ArrowRight, Smartphone, Shield, Star, Plus, Minus, Hash, Github } from "lucide-react";
 
 export default function LandingPage() {
     const user = useUser();
@@ -188,6 +188,15 @@ export default function LandingPage() {
                                 <h2 className="text-8xl font-black uppercase tracking-tighter text-zinc-900 select-none">
                                     Fit<br />Tracker
                                 </h2>
+                                <a
+                                    href="https://github.com/kntjspr/swe-new"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 mt-8 text-zinc-500 hover:text-[#FF4B00] transition-colors border border-zinc-800 hover:border-[#FF4B00] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
+                                >
+                                    <Github className="w-4 h-4" />
+                                    <span>Codebase</span>
+                                </a>
                             </div>
                             <div>
                                 <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Sitemap</h4>
