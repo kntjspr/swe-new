@@ -49,7 +49,7 @@ export async function initializeDatabase(): Promise<void> {
       workout_id INTEGER REFERENCES workouts(id) ON DELETE SET NULL,
       name VARCHAR(255) NOT NULL,
       duration INTEGER NOT NULL,
-      calories INTEGER NOT NULL,
+      calories INTEGER NOT NULL DEFAULT 0,
       muscles TEXT[] NOT NULL,
       exercises JSONB NOT NULL,
       completed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
