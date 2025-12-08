@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useUser } from "@stackframe/stack";
 import LandingHeader from "../components/LandingHeader";
-import { ArrowRight, Smartphone, Shield, Star } from "lucide-react";
+import { ArrowRight, Smartphone, Shield, Star, Plus, Minus, Hash } from "lucide-react";
 
 export default function LandingPage() {
     const user = useUser();
@@ -16,136 +16,209 @@ export default function LandingPage() {
             router.push("/dashboard");
         }
     }, [user, router]);
+
     return (
         <div className="flex flex-col min-h-screen bg-black text-white font-mono selection:bg-[#FF4B00] selection:text-white">
             <LandingHeader />
 
-            <main className="flex-1 flex flex-col">
+            <main className="flex-1 flex flex-col pt-20">
                 {/* Hero Section */}
-                <section className="flex-1 flex flex-col items-center justify-center p-6 pt-32 md:p-12 md:pt-40 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-900/50 via-black to-black opacity-50 z-0 pointer-events-none"></div>
+                <section className="relative border-b border-t border-zinc-800 bg-zinc-950">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[80vh]">
+                        {/* Left Column: Big Text */}
+                        <div className="lg:col-span-8 border-r border-zinc-800 p-8 flex flex-col justify-between relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none"></div>
 
-                    <div className="max-w-4xl w-full relative z-10 text-center space-y-8">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-950/50 text-xs font-medium text-zinc-400 mb-4 animate-fade-in-up">
-                            <span className="w-2 h-2 rounded-full bg-[#FF4B00]"></span>
-                            <span>v2.0 Now Available</span>
+                            <div className="flex items-center gap-4 text-[#FF4B00] uppercase tracking-widest text-xs font-bold mb-12">
+                                <span className="w-3 h-3 bg-[#FF4B00]"></span>
+                                <span>System Status: Online</span>
+                            </div>
+
+                            <div className="relative z-10">
+                                <h1 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8] mb-6">
+                                    Fit<br />
+                                    Tracker<br />
+                                    <span className="text-outline text-transparent stroke-white" style={{ WebkitTextStroke: "2px white" }}>Pro</span>
+                                </h1>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center mt-12">
+                                <Link
+                                    href="/dashboard"
+                                    className="bg-[#FF4B00] hover:bg-white hover:text-black text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center gap-4"
+                                >
+                                    Start Protocol
+                                    <ArrowRight className="w-4 h-4" />
+                                </Link>
+                                <div className="text-zinc-500 text-xs uppercase tracking-widest max-w-[200px] leading-relaxed">
+                                    Advanced metrics for the modern physique.
+                                </div>
+                            </div>
                         </div>
 
-                        <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9] md:leading-[0.85] mix-blend-difference">
-                            Forge Your <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500">Peak</span>
-                            <br />
-                            <span className="text-[#FF4B00]">Physique</span>
-                        </h1>
+                        {/* Right Column: Interactive/Details */}
+                        <div className="lg:col-span-4 flex flex-col h-full">
+                            <div className="flex-1 border-b border-zinc-800 p-8 flex flex-col justify-center bg-zinc-900/50">
+                                <div className="animate-pulse flex gap-2 mb-4">
+                                    {[...Array(3)].map((_, i) => (
+                                        <div key={i} className="w-2 h-2 bg-[#FF4B00]"></div>
+                                    ))}
+                                </div>
+                                <p className="text-2xl font-bold uppercase leading-tight">
+                                    "The only bad workout is the one that didn't happen."
+                                </p>
+                            </div>
 
-                        <p className="max-w-xl mx-auto text-zinc-400 text-sm md:text-base leading-relaxed">
-                            AI-powered workout generation, advanced analytics, and seamless tracking.
-                            The ultimate tool for the modern athlete.
-                        </p>
+                            <div className="flex-1 border-b border-zinc-800 p-8 flex flex-col justify-end bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat grayscale hover:grayscale-0 transition-all duration-500">
+                                <div className="bg-black/80 backdrop-blur-sm p-4 border border-zinc-800">
+                                    <p className="text-xs text-zinc-400 uppercase mb-1">Latest Update</p>
+                                    <p className="text-white font-bold uppercase">v2.4 Live Now</p>
+                                </div>
+                            </div>
 
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                            <Link
-                                href="/dashboard"
-                                className="group h-12 px-8 flex items-center gap-2 bg-[#FF4B00] hover:bg-[#D43D00] text-white font-bold uppercase tracking-widest transition-all shadow-[0_0_30px_rgba(255,75,0,0.3)] hover:shadow-[0_0_50px_rgba(255,75,0,0.5)]"
-                            >
-                                <span>Start Training</span>
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-
-                            <a
-                                href="#features"
-                                className="h-12 px-8 flex items-center justify-center text-zinc-400 hover:text-white font-bold uppercase tracking-widest transition-colors"
-                            >
-                                Learn More
-                            </a>
+                            <div className="h-32 p-4 bg-[#FF4B00] text-black flex items-center justify-between overflow-hidden relative group cursor-pointer">
+                                <span className="absolute -right-4 -bottom-8 text-9xl font-black opacity-10 group-hover:opacity-20 transition-opacity">GO</span>
+                                <div>
+                                    <p className="font-bold text-4xl uppercase tracking-tighter">Join Now</p>
+                                    <p className="text-sm font-bold uppercase tracking-widest opacity-70">Free Forever</p>
+                                </div>
+                                <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Marquee */}
-                <div className="border-y border-white/10 bg-black py-4 overflow-hidden relative">
-                    <div className="animate-marquee whitespace-nowrap flex font-black text-4xl uppercase tracking-tighter select-none opacity-50 text-zinc-800">
-                        <div className="flex gap-12 pr-12">
-                            <span>Strength</span> <span>Endurance</span> <span>Power</span> <span>Hypertrophy</span>
-                            <span>Strength</span> <span>Endurance</span> <span>Power</span> <span>Hypertrophy</span>
+                {/* Infinite Marquees */}
+                <div className="border-b border-zinc-800 bg-black overflow-hidden relative">
+                    {/* Top Marquee */}
+                    <div className="border-b border-zinc-800 py-3 bg-[#FF4B00] text-black">
+                        <div className="animate-marquee whitespace-nowrap flex text-sm font-bold uppercase tracking-[0.2em]">
+                            <div className="flex gap-16 pr-16 items-center">
+                                {Array(8).fill("Initialize Sequence").map((text, i) => (
+                                    <span key={i} className="flex items-center gap-4">
+                                        {text} <Plus className="w-4 h-4" />
+                                    </span>
+                                ))}
+                            </div>
+                            <div className="flex gap-16 pr-16 items-center">
+                                {Array(8).fill("Initialize Sequence").map((text, i) => (
+                                    <span key={i} className="flex items-center gap-4">
+                                        {text} <Plus className="w-4 h-4" />
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                        <div className="flex gap-12 pr-12">
-                            <span>Strength</span> <span>Endurance</span> <span>Power</span> <span>Hypertrophy</span>
-                            <span>Strength</span> <span>Endurance</span> <span>Power</span> <span>Hypertrophy</span>
+                    </div>
+                    {/* Bottom Marquee (Reverse) */}
+                    <div className="py-6">
+                        <div className="animate-marquee-reverse whitespace-nowrap flex text-6xl font-black uppercase tracking-tighter text-zinc-900 select-none">
+                            <div className="flex gap-12 pr-12">
+                                <span>Power</span> <span className="text-outline-zinc">Speed</span> <span>Strength</span> <span className="text-outline-zinc">Endurance</span>
+                                <span>Power</span> <span className="text-outline-zinc">Speed</span> <span>Strength</span> <span className="text-outline-zinc">Endurance</span>
+                            </div>
+                            <div className="flex gap-12 pr-12">
+                                <span>Power</span> <span className="text-outline-zinc">Speed</span> <span>Strength</span> <span className="text-outline-zinc">Endurance</span>
+                                <span>Power</span> <span className="text-outline-zinc">Speed</span> <span>Strength</span> <span className="text-outline-zinc">Endurance</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Benton Grid Features */}
-                <section id="features" className="bg-black p-4 py-20 md:p-20 relative z-10">
-                    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4">
-                        {/* Large Card */}
-                        <div className="md:col-span-8 bg-zinc-950 border border-white/10 p-8 md:p-12 flex flex-col justify-between group hover:border-zinc-700 transition-colors min-h-[300px]">
+                {/* Asymmetric Grid Features */}
+                <section className="bg-black p-4 py-20 relative z-10 border-b border-zinc-800">
+                    <div className="max-w-[1800px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-[1px] bg-zinc-800 border border-zinc-800">
+                        {/* Card 1: AI Generator */}
+                        <div className="md:col-span-2 md:row-span-2 bg-zinc-950 p-12 flex flex-col justify-between group hover:bg-[#FF4B00] hover:text-black transition-colors min-h-[500px]">
+                            <div className="flex justify-between items-start">
+                                <div className="border border-current px-3 py-1 text-xs font-bold uppercase tracking-widest">
+                                    01 // Core
+                                </div>
+                                <Hash className="w-12 h-12 opacity-20" />
+                            </div>
                             <div>
-                                <h3 className="text-3xl font-bold uppercase mb-4 text-white">AI Generator</h3>
-                                <p className="text-zinc-400 font-mono max-w-sm">
+                                <h3 className="text-6xl font-black uppercase mb-6 tracking-tighter">AI<br />Generate</h3>
+                                <p className="text-sm font-mono opacity-70 max-w-sm leading-relaxed border-l-2 border-current pl-4">
                                     Input your time, equipment, and goals. Let our advanced algorithm build the perfect workout for you instantly.
                                 </p>
                             </div>
-                            <div className="self-end mt-8">
-                                <div className="bg-[#FF4B00] text-black font-bold p-3 inline-block transform rotate-[-2deg] group-hover:rotate-0 transition-transform">
-                                    TRY IT NOW →
-                                </div>
+                        </div>
+
+                        {/* Card 2: Analytics */}
+                        <div className="md:col-span-1 bg-zinc-900/50 p-8 flex flex-col justify-between group hover:bg-white hover:text-black transition-colors min-h-[300px]">
+                            <Shield className="w-8 h-8" />
+                            <div>
+                                <h3 className="text-2xl font-bold uppercase mb-2">Secure<br />Logs</h3>
+                                <p className="text-xs uppercase tracking-widest opacity-60">Encrypted Data History</p>
                             </div>
                         </div>
 
-                        {/* Tall Card */}
-                        <div className="md:col-span-4 bg-zinc-900 border border-white/5 p-8 flex flex-col justify-between group hover:bg-[#FF4B00] transition-colors relative overflow-hidden">
-                            <div className="h-full flex flex-col justify-center relative z-10">
-                                <h3 className="text-2xl font-bold uppercase mb-2 text-white">History Logs</h3>
-                                <p className="text-sm text-[#FF4B00] group-hover:text-white uppercase tracking-widest mb-4">Track Progress</p>
-                                <p className="text-zinc-400 group-hover:text-white/80 font-mono text-sm">Keep a detailed record of every workout complete, duration, and calories burned.</p>
+                        {/* Card 3: Mobile */}
+                        <div className="md:col-span-1 bg-zinc-900/50 p-8 flex flex-col justify-between group hover:bg-white hover:text-black transition-colors min-h-[300px]">
+                            <Smartphone className="w-8 h-8" />
+                            <div>
+                                <h3 className="text-2xl font-bold uppercase mb-2">Any<br />Device</h3>
+                                <p className="text-xs uppercase tracking-widest opacity-60">PWA Optimized</p>
                             </div>
                         </div>
 
-                        {/* Small Card */}
-                        <div className="md:col-span-3 bg-white text-black p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group hover:bg-[#FF4B00] transition-colors">
-                            <h3 className="text-4xl font-black uppercase leading-none tracking-tighter mb-2 group-hover:scale-110 transition-transform">Free<br />Access</h3>
-                            <p className="font-mono font-bold text-sm opacity-60">Start Now</p>
-                        </div>
-
-                        {/* Wide Card */}
-                        <div className="md:col-span-9 bg-zinc-950 border border-white/10 p-8 flex flex-col md:flex-row items-center justify-between gap-8 group hover:border-white transition-colors">
+                        {/* Card 4: Wide Stats */}
+                        <div className="md:col-span-2 bg-black border-t border-zinc-800 p-10 flex flex-col md:flex-row items-center justify-between gap-8 group">
                             <div className="text-left">
-                                <h3 className="text-2xl font-bold uppercase mb-2 text-white">Responsive Design</h3>
-                                <p className="text-zinc-400 font-mono max-w-lg">Designed for any device. Take your workouts with you to the gym, home, or on the go.</p>
+                                <h3 className="text-4xl font-black uppercase mb-2 text-white">
+                                    <span className="text-[#FF4B00]">Real-Time</span> Analytics
+                                </h3>
+                                <p className="text-zinc-500 text-xs uppercase tracking-widest">
+                                    Track volume, intensity, and frequency.
+                                </p>
                             </div>
-                            <div className="flex gap-4">
-                                <div className="w-12 h-12 bg-zinc-900 flex items-center justify-center border border-white/20 group-hover:border-[#FF4B00] group-hover:text-[#FF4B00] transition-colors">
-                                    <Smartphone className="w-5 h-5" />
-                                </div>
-                                <div className="w-12 h-12 bg-zinc-900 flex items-center justify-center border border-white/20 group-hover:border-[#FF4B00] group-hover:text-[#FF4B00] transition-colors">
-                                    <Shield className="w-5 h-5" />
-                                </div>
-                                <div className="w-12 h-12 bg-zinc-900 flex items-center justify-center border border-white/20 group-hover:border-[#FF4B00] group-hover:text-[#FF4B00] transition-colors">
-                                    <Star className="w-5 h-5" />
-                                </div>
+                            <div className="flex gap-2">
+                                {[1, 2, 3, 4, 5].map((h) => (
+                                    <div key={h} className="w-4 bg-zinc-800 hover:bg-[#FF4B00] transition-colors" style={{ height: `${h * 16}px` }}></div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </section>
 
-                {/* Footer marquee */}
-                <div className="border-t border-white/10 bg-black py-2 overflow-hidden relative">
-                    <div className="animate-marquee-reverse whitespace-nowrap flex text-zinc-800 font-mono text-sm uppercase tracking-widest select-none">
-                        <div className="flex gap-8 pr-8">
-                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                {/* Footer Section */}
+                <footer className="bg-zinc-950 pt-20 pb-10 border-t border-zinc-800">
+                    <div className="max-w-[1800px] mx-auto px-6">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                            <div className="col-span-2">
+                                <h2 className="text-8xl font-black uppercase tracking-tighter text-zinc-900 select-none">
+                                    Fit<br />Tracker
+                                </h2>
+                            </div>
+                            <div>
+                                <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Sitemap</h4>
+                                <ul className="space-y-4 text-sm font-bold uppercase tracking-wider text-zinc-400">
+                                    <li><Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
+                                    <li><Link href="/generate" className="hover:text-white transition-colors">Generate</Link></li>
+                                    <li><Link href="/history" className="hover:text-white transition-colors">History</Link></li>
+                                    <li><Link href="/settings" className="hover:text-white transition-colors">Settings</Link></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Legal</h4>
+                                <ul className="space-y-4 text-sm font-bold uppercase tracking-wider text-zinc-400">
+                                    <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
+                                    <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
+                                    <li><a href="#" className="hover:text-white transition-colors">Cookies</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div className="flex gap-8 pr-8">
-                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
-                            <span>FitTracker</span> <span>//</span> <span>Generate</span> <span>//</span> <span>Track</span> <span>//</span> <span>Analyze</span> <span>//</span>
+                        <div className="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p className="text-zinc-600 text-xs font-mono uppercase">
+                                © 2024 FitTracker Ops. All Systems Nominal.
+                            </p>
+                            <div className="flex gap-4">
+                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span className="text-xs text-green-500 font-bold uppercase tracking-widest">Server Active</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </footer>
             </main>
         </div>
     );
 }
-
