@@ -44,7 +44,7 @@ export default function LandingPage() {
 
                             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center mt-12">
                                 <Link
-                                    href="/dashboard"
+                                    href="/handler/sign-in"
                                     className="bg-[#FF4B00] hover:bg-white hover:text-black text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center gap-4"
                                 >
                                     Start Protocol
@@ -76,7 +76,7 @@ export default function LandingPage() {
                                 </div>
                             </div>
 
-                            <Link href="/dashboard" className="h-32 p-4 bg-[#FF4B00] text-black flex items-center justify-between overflow-hidden relative group cursor-pointer">
+                            <Link href="/handler/sign-up" className="h-32 p-4 bg-[#FF4B00] text-black flex items-center justify-between overflow-hidden relative group cursor-pointer">
                                 <span className="absolute -right-4 -bottom-8 text-9xl font-black opacity-10 group-hover:opacity-20 transition-opacity">GO</span>
                                 <div>
                                     <p className="font-bold text-4xl uppercase tracking-tighter">Join Now</p>
