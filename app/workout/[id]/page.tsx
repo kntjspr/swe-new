@@ -196,32 +196,45 @@ export default function WorkoutDetail({
     };
 
     const toggleSetComplete = (exerciseId: string, setIndex: number) => {
+        const exercise = workout?.exercises?.find((e) => e.id === exerciseId);
+        const isCurrentlyComplete = progress[exerciseId]?.completedSets.includes(setIndex);
+
+        // Start rest timer if we are marking the set as complete
+        if (!isCurrentlyComplete && exercise) {
+            startRestTimer(exercise.restSeconds);
+        }
+
         setProgress((prev) => {
             const exerciseProgress = prev[exerciseId] || {
                 completedSets: [],
                 repsPerSet: {},
             };
             const completedSets = [...exerciseProgress.completedSets];
+            const repsPerSet = { ...exerciseProgress.repsPerSet };
 
             if (completedSets.includes(setIndex)) {
                 completedSets.splice(completedSets.indexOf(setIndex), 1);
             } else {
                 completedSets.push(setIndex);
-                // Start rest timer when completing a set
-                const exercise = workout?.exercises?.find((e) => e.id === exerciseId);
-                if (exercise) {
-                    startRestTimer(exercise.restSeconds);
+
+                // If reps is blank, use the default rep amount from exercise
+                if (!repsPerSet[setIndex] && exercise) {
+                    // Parse the reps string (could be "10" or "8-12")
+                    const defaultReps = parseInt(exercise.reps) || 10;
+                    repsPerSet[setIndex] = defaultReps;
                 }
             }
 
             return {
                 ...prev,
-                [exerciseId]: { ...exerciseProgress, completedSets },
+                [exerciseId]: { ...exerciseProgress, completedSets, repsPerSet },
             };
         });
     };
 
     const updateReps = (exerciseId: string, setIndex: number, reps: number) => {
+        // Prevent negative reps
+        const safeReps = Math.max(0, reps);
         setProgress((prev) => {
             const exerciseProgress = prev[exerciseId] || {
                 completedSets: [],
@@ -231,7 +244,7 @@ export default function WorkoutDetail({
                 ...prev,
                 [exerciseId]: {
                     ...exerciseProgress,
-                    repsPerSet: { ...exerciseProgress.repsPerSet, [setIndex]: reps },
+                    repsPerSet: { ...exerciseProgress.repsPerSet, [setIndex]: safeReps },
                 },
             };
         });
@@ -259,7 +272,7 @@ export default function WorkoutDetail({
                 body: JSON.stringify({
                     workoutId: workout?.id,
                     name: workout?.name,
-                    duration: timerSeconds,
+                    duration: Math.max(1, Math.round(timerSeconds / 60)), // Convert seconds to minutes, minimum 1
                     calories: workout?.estimated_calories, // Use estimated for now, or calculate
                     muscles: workout?.muscles,
                     exercises: {
@@ -286,7 +299,7 @@ export default function WorkoutDetail({
             <section className="fade-in p-6 md:p-0">
                 <Link
                     href="/history"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-white mb-6"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-[#FF4B00] transition-colors mb-6"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to History
@@ -302,26 +315,33 @@ export default function WorkoutDetail({
     const progressPercent = calculateProgress();
 
     return (
-        <section className="fade-in p-6 md:p-0 pb-40 md:pb-10">
+        <section className="fade-in p-6 md:px-8 lg:px-12 max-w-7xl mx-auto pb-40 md:pb-10">
             {/* Header */}
-            <Link
-                href="/history"
-                className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-white mb-6"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                Back to History
-            </Link>
+            <header className="mb-8 flex items-end justify-between border-b border-zinc-800 pb-6">
+                <div>
+                    <Link
+                        href="/history"
+                        className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-[#FF4B00] transition-colors uppercase tracking-widest mb-3"
+                    >
+                        <ArrowLeft className="w-4 h-4" />
+                        Back to History
+                    </Link>
+                    <h1 className="text-2xl font-bold tracking-tight text-white uppercase font-mono">
+                        Active_Session
+                    </h1>
+                </div>
+            </header>
 
             {/* Workout Info Card */}
-            <div className="bg-gradient-to-br from-[#FF4B00] to-[#FF6B00] p-6 rounded-3xl text-white shadow-xl shadow-[#FF4B00]/20 mb-6">
+            <div className="bg-gradient-to-br from-[#FF4B00] to-[#FF6B00] p-6 text-white shadow-xl shadow-[#FF4B00]/20 mb-8">
                 <div className="flex items-start justify-between mb-4">
                     <div>
-                        <h1 className="text-2xl font-bold">{workout.name}</h1>
+                        <h2 className="text-xl font-bold font-mono uppercase tracking-tight">{workout.name}</h2>
                         <div className="flex flex-wrap gap-2 mt-3">
                             {workout.muscles.slice(0, 4).map((muscle) => (
                                 <span
                                     key={muscle}
-                                    className="bg-white/20 px-3 py-1 rounded-full text-xs font-semibold"
+                                    className="bg-white/20 px-2 py-1 text-[10px] font-bold uppercase tracking-widest"
                                 >
                                     {muscleLabels[muscle] || muscle}
                                 </span>
@@ -333,34 +353,34 @@ export default function WorkoutDetail({
                     ></div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-6">
-                    <div className="bg-white/10 rounded-2xl p-4 text-center">
+                <div className="grid grid-cols-3 gap-3 mt-6">
+                    <div className="bg-white/10 p-4 text-center">
                         <Clock className="w-5 h-5 mx-auto mb-2 opacity-80" />
-                        <div className="text-lg font-bold">{workout.duration}</div>
-                        <div className="text-xs opacity-70">minutes</div>
+                        <div className="text-lg font-bold font-mono">{workout.duration}</div>
+                        <div className="text-[10px] opacity-70 uppercase tracking-widest">minutes</div>
                     </div>
-                    <div className="bg-white/10 rounded-2xl p-4 text-center">
+                    <div className="bg-white/10 p-4 text-center">
                         <Flame className="w-5 h-5 mx-auto mb-2 opacity-80" />
-                        <div className="text-lg font-bold">{workout.estimated_calories}</div>
-                        <div className="text-xs opacity-70">calories</div>
+                        <div className="text-lg font-bold font-mono">{workout.estimated_calories}</div>
+                        <div className="text-[10px] opacity-70 uppercase tracking-widest">calories</div>
                     </div>
-                    <div className="bg-white/10 rounded-2xl p-4 text-center">
+                    <div className="bg-white/10 p-4 text-center">
                         <Dumbbell className="w-5 h-5 mx-auto mb-2 opacity-80" />
-                        <div className="text-lg font-bold">{exercises.length}</div>
-                        <div className="text-xs opacity-70">exercises</div>
+                        <div className="text-lg font-bold font-mono">{exercises.length}</div>
+                        <div className="text-[10px] opacity-70 uppercase tracking-widest">exercises</div>
                     </div>
                 </div>
             </div>
 
             {/* Timer Section */}
             {workoutStarted && !workoutCompleted && (
-                <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-100 dark:border-zinc-800 p-6 mb-6 shadow-sm">
+                <div className="bg-zinc-900 border border-zinc-800 p-6 mb-8">
                     <div className="flex items-center justify-between">
                         <div>
-                            <div className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">
+                            <div className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-1">
                                 Workout Timer
                             </div>
-                            <div className="text-4xl font-bold text-zinc-900 dark:text-white font-mono">
+                            <div className="text-4xl font-bold text-white font-mono">
                                 {formatTime(timerSeconds)}
                             </div>
                         </div>
@@ -368,9 +388,9 @@ export default function WorkoutDetail({
                         <div className="flex gap-2">
                             <button
                                 onClick={toggleTimer}
-                                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${isTimerRunning
-                                    ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-600"
-                                    : "bg-[#FF4B00] text-white"
+                                className={`w-12 h-12 flex items-center justify-center transition-all ${isTimerRunning
+                                    ? "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                                    : "bg-[#FF4B00] text-white hover:bg-[#E04100]"
                                     }`}
                             >
                                 {isTimerRunning ? (
@@ -384,10 +404,10 @@ export default function WorkoutDetail({
 
                     {/* Rest Timer */}
                     {isRestTimerRunning && (
-                        <div className="mt-4 p-4 bg-[#0080FF]/10 rounded-2xl">
+                        <div className="mt-4 p-4 bg-[#0080FF]/10 border border-[#0080FF]/30">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <div className="text-xs font-bold uppercase tracking-wider text-[#0080FF] mb-1">
+                                    <div className="text-xs font-bold uppercase tracking-widest text-[#0080FF] mb-1">
                                         Rest Timer
                                     </div>
                                     <div className="text-2xl font-bold text-[#0080FF] font-mono">
@@ -396,7 +416,7 @@ export default function WorkoutDetail({
                                 </div>
                                 <button
                                     onClick={() => setIsRestTimerRunning(false)}
-                                    className="text-xs font-semibold text-[#0080FF] hover:underline"
+                                    className="text-xs font-bold uppercase tracking-widest text-[#0080FF] hover:text-white transition-colors"
                                 >
                                     Skip
                                 </button>
@@ -405,14 +425,14 @@ export default function WorkoutDetail({
                     )}
 
                     {/* Progress Bar */}
-                    <div className="mt-4">
-                        <div className="flex justify-between text-xs font-medium text-zinc-400 mb-2">
+                    <div className="mt-6">
+                        <div className="flex justify-between text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">
                             <span>Progress</span>
-                            <span>{progressPercent}%</span>
+                            <span className="text-[#FF4B00]">{progressPercent}%</span>
                         </div>
-                        <div className="w-full bg-zinc-100 dark:bg-zinc-800 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-zinc-800 h-2 overflow-hidden">
                             <div
-                                className="bg-[#FF4B00] h-full rounded-full transition-all duration-300"
+                                className="bg-[#FF4B00] h-full transition-all duration-300"
                                 style={{ width: `${progressPercent}%` }}
                             ></div>
                         </div>
@@ -422,17 +442,17 @@ export default function WorkoutDetail({
 
             {/* Workout Completed */}
             {workoutCompleted && (
-                <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-3xl p-6 mb-6 text-center">
+                <div className="bg-green-900/20 border border-green-700 p-6 mb-8 text-center">
                     <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                    <h2 className="text-xl font-bold text-green-600 dark:text-green-400 mb-2">
+                    <h2 className="text-xl font-bold text-green-400 mb-2 uppercase font-mono">
                         Workout Complete!
                     </h2>
-                    <p className="text-sm text-green-600/80 dark:text-green-400/80">
+                    <p className="text-sm text-green-400/80 font-mono">
                         Total time: {formatTime(timerSeconds)} • {progressPercent}% completed
                     </p>
                     <Link
                         href="/history"
-                        className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-green-500 text-white rounded-full text-sm font-semibold hover:bg-green-600 transition-colors"
+                        className="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-green-500 text-white text-xs font-bold uppercase tracking-widest hover:bg-green-600 transition-colors"
                     >
                         <Calendar className="w-4 h-4" />
                         View History
@@ -444,7 +464,7 @@ export default function WorkoutDetail({
             {!workoutStarted && (
                 <button
                     onClick={startWorkout}
-                    className="w-full flex items-center justify-center gap-3 bg-[#FF4B00] hover:bg-[#E04100] text-white px-6 py-4 rounded-2xl text-sm font-bold transition-all shadow-lg shadow-[#FF4B00]/25 mb-6"
+                    className="w-full flex items-center justify-center gap-3 bg-[#FF4B00] hover:bg-[#E04100] text-white px-6 py-4 text-sm font-bold uppercase tracking-widest transition-all shadow-lg shadow-[#FF4B00]/25 mb-8"
                 >
                     <Play className="w-5 h-5" />
                     <span>Start Workout</span>
@@ -452,10 +472,10 @@ export default function WorkoutDetail({
             )}
 
             {/* Exercise List */}
-            <div className="space-y-3">
-                <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
+            <div className="space-y-4">
+                <h3 className="text-sm font-bold text-white uppercase tracking-widest">
                     Exercises
-                </h2>
+                </h3>
                 {exercises.map((exercise, index) => {
                     const exerciseProgress = progress[exercise.id] || {
                         completedSets: [],
@@ -467,9 +487,9 @@ export default function WorkoutDetail({
                     return (
                         <div
                             key={exercise.id}
-                            className={`bg-white dark:bg-zinc-900 rounded-2xl border transition-all overflow-hidden shadow-sm ${allSetsComplete
-                                ? "border-green-300 dark:border-green-700 bg-green-50/50 dark:bg-green-900/10"
-                                : "border-zinc-100 dark:border-zinc-800"
+                            className={`bg-zinc-900 border transition-all overflow-hidden ${allSetsComplete
+                                ? "border-green-700 bg-green-900/10"
+                                : "border-zinc-800 hover:border-zinc-700"
                                 }`}
                         >
                             <button
@@ -482,18 +502,18 @@ export default function WorkoutDetail({
                             >
                                 <div className="flex items-center gap-4">
                                     <div
-                                        className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition-colors ${allSetsComplete
+                                        className={`w-10 h-10 flex items-center justify-center font-bold text-sm transition-colors ${allSetsComplete
                                             ? "bg-green-500 text-white"
-                                            : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500"
+                                            : "bg-zinc-800 text-zinc-500"
                                             }`}
                                     >
                                         {allSetsComplete ? <Check className="w-5 h-5" /> : index + 1}
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-zinc-900 dark:text-white">
+                                        <h4 className="font-bold text-white font-mono uppercase">
                                             {exercise.name}
-                                        </h3>
-                                        <p className="text-xs text-zinc-400 mt-1">
+                                        </h4>
+                                        <p className="text-xs text-zinc-500 mt-1 font-mono">
                                             {exerciseProgress.completedSets.length}/{exercise.sets} sets
                                             × {exercise.reps}
                                         </p>
@@ -507,7 +527,7 @@ export default function WorkoutDetail({
                             </button>
 
                             {expandedExercise === exercise.id && (
-                                <div className="px-5 pb-5 border-t border-zinc-100 dark:border-zinc-800">
+                                <div className="px-5 pb-5 border-t border-zinc-800">
                                     {/* Sets Tracking */}
                                     {workoutStarted && !workoutCompleted && (
                                         <div className="mt-4 space-y-3">
@@ -520,70 +540,63 @@ export default function WorkoutDetail({
                                                 return (
                                                     <div
                                                         key={setIdx}
-                                                        className={`flex items-center gap-4 p-3 rounded-xl transition-colors ${isComplete
-                                                            ? "bg-green-50 dark:bg-green-900/20"
-                                                            : "bg-zinc-50 dark:bg-zinc-800"
+                                                        className={`flex items-center gap-4 p-3 transition-colors ${isComplete
+                                                            ? "bg-green-900/20 border border-green-700"
+                                                            : "bg-zinc-800 border border-zinc-700"
                                                             }`}
                                                     >
                                                         <button
                                                             onClick={() =>
                                                                 toggleSetComplete(exercise.id, setIdx)
                                                             }
-                                                            className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${isComplete
+                                                            className={`w-8 h-8 border-2 flex items-center justify-center transition-all ${isComplete
                                                                 ? "bg-green-500 border-green-500 text-white"
-                                                                : "border-zinc-300 dark:border-zinc-600 hover:border-[#FF4B00]"
+                                                                : "border-zinc-600 hover:border-[#FF4B00]"
                                                                 }`}
                                                         >
                                                             {isComplete && <Check className="w-4 h-4" />}
                                                         </button>
                                                         <div className="flex-1">
-                                                            <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                                                            <div className="text-sm font-bold text-white font-mono">
                                                                 Set {setIdx + 1}
                                                             </div>
-                                                            <div className="text-xs text-zinc-400">
+                                                            <div className="text-xs text-zinc-500 font-mono">
                                                                 Target: {exercise.reps}
                                                             </div>
                                                         </div>
                                                         <div className="flex items-center gap-2">
                                                             <input
                                                                 type="number"
+                                                                min="0"
                                                                 placeholder="Reps"
                                                                 value={repsLogged}
                                                                 onChange={(e) =>
                                                                     updateReps(
                                                                         exercise.id,
                                                                         setIdx,
-                                                                        parseInt(e.target.value) || 0
+                                                                        Math.max(0, parseInt(e.target.value) || 0)
                                                                     )
                                                                 }
-                                                                className="w-16 px-3 py-2 text-sm font-medium text-center border border-zinc-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white"
+                                                                className="w-16 px-3 py-2 text-sm font-bold text-center border border-zinc-700 bg-zinc-900 text-white font-mono"
                                                             />
                                                         </div>
                                                     </div>
                                                 );
                                             })}
 
-                                            {/* Quick Rest Timer */}
-                                            <button
-                                                onClick={() => startRestTimer(exercise.restSeconds)}
-                                                disabled={isRestTimerRunning}
-                                                className="w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold text-[#0080FF] bg-[#0080FF]/10 rounded-xl hover:bg-[#0080FF]/20 transition-colors disabled:opacity-50"
-                                            >
-                                                <Clock className="w-4 h-4" />
-                                                Start {exercise.restSeconds}s Rest
-                                            </button>
+
                                         </div>
                                     )}
 
                                     {/* Exercise Tip */}
-                                    <div className="bg-[#FF4B00]/5 dark:bg-[#FF4B00]/10 rounded-xl p-4 mt-4">
+                                    <div className="bg-[#FF4B00]/10 border border-[#FF4B00]/30 p-4 mt-4">
                                         <div className="flex items-start gap-2">
                                             <span className="text-[#FF4B00] text-lg">💡</span>
                                             <div>
-                                                <h4 className="text-xs font-bold text-[#FF4B00] uppercase tracking-wide mb-1">
+                                                <h5 className="text-xs font-bold text-[#FF4B00] uppercase tracking-widest mb-1">
                                                     Pro Tip
-                                                </h4>
-                                                <p className="text-sm text-zinc-600 dark:text-zinc-300">
+                                                </h5>
+                                                <p className="text-sm text-zinc-300">
                                                     {exercise.tip}
                                                 </p>
                                             </div>
@@ -594,7 +607,7 @@ export default function WorkoutDetail({
                                         {exercise.muscles.map((muscle) => (
                                             <span
                                                 key={muscle}
-                                                className="text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-3 py-1 rounded-full"
+                                                className="text-[10px] font-bold uppercase tracking-widest bg-zinc-800 text-zinc-400 px-2 py-1"
                                             >
                                                 {muscleLabels[muscle] || muscle}
                                             </span>
@@ -611,7 +624,7 @@ export default function WorkoutDetail({
             {workoutStarted && !workoutCompleted && (
                 <button
                     onClick={finishWorkout}
-                    className="fixed bottom-24 md:bottom-10 left-6 right-6 md:left-auto md:right-10 md:w-auto flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl text-sm font-bold transition-all shadow-xl z-40"
+                    className="fixed bottom-24 md:bottom-10 left-6 right-6 md:left-auto md:right-10 md:w-auto flex items-center justify-center gap-2 bg-[#FF4B00] hover:bg-[#E04100] text-white px-8 py-4 rounded-2xl text-sm font-bold transition-all shadow-xl shadow-[#FF4B00]/20 z-40"
                 >
                     <CheckCircle2 className="w-5 h-5" />
                     <span>Finish Workout</span>

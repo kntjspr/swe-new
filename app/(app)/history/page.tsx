@@ -91,7 +91,7 @@ export default function WorkoutHistory() {
             <header className="mb-10 flex items-end justify-between border-b border-zinc-800 pb-6">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight text-white uppercase font-mono">
-                        System_Logs
+                        History
                     </h1>
                     <p className="text-xs text-zinc-500 mt-2 uppercase tracking-widest">
                         Archive // {logs.length} Entries

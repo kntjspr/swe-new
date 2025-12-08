@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Dumbbell, Flame, Clock, Loader2, Activity } from "lucide-react";
+import { ArrowRight, Dumbbell, Flame, Clock, Loader2, Activity, Play, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { useUser } from "@stackframe/stack";
 import MuscleSelector, { type MuscleGroup } from "../../components/MuscleSelector";
@@ -20,6 +20,17 @@ interface RecentWorkout {
   name: string;
   muscles: MuscleGroup[];
   duration: number;
+  created_at: string;
+}
+
+interface SavedWorkout {
+  id: number;
+  name: string;
+  muscles: MuscleGroup[];
+  equipment: string[];
+  duration: number;
+  difficulty: string;
+  estimated_calories: number;
   created_at: string;
 }
 
@@ -45,12 +56,14 @@ export default function Dashboard() {
 
   const [stats, setStats] = useState<Stats | null>(null);
   const [recentWorkouts, setRecentWorkouts] = useState<RecentWorkout[]>([]);
+  const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedMuscles, setSelectedMuscles] = useState<Set<MuscleGroup>>(new Set());
 
   useEffect(() => {
     if (user) {
       fetchStats();
+      fetchSavedWorkouts();
     } else {
       setIsLoading(false);
     }
@@ -80,6 +93,19 @@ export default function Dashboard() {
       console.error("Failed to fetch stats:", err);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchSavedWorkouts = async () => {
+    try {
+      const response = await fetch("/api/workouts");
+      const data = await response.json();
+
+      if (response.ok) {
+        setSavedWorkouts(data.workouts || []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch saved workouts:", err);
     }
   };
 
@@ -259,6 +285,71 @@ export default function Dashboard() {
               )}
             </div>
           </div>
+
+          {/* Saved Workouts */}
+          {savedWorkouts.length > 0 && (
+            <div className="mt-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
+                  <Bookmark className="w-4 h-4 text-[#FF4B00]" />
+                  Saved Workouts
+                </h3>
+                <Link
+                  href="/saved"
+                  className="text-xs text-zinc-500 hover:text-[#FF4B00] transition-colors uppercase tracking-widest"
+                >
+                  View All
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {savedWorkouts.slice(0, 6).map((workout) => (
+                  <div
+                    key={workout.id}
+                    className="bg-zinc-900 border border-zinc-800 p-5 group hover:border-[#FF4B00] transition-all relative overflow-hidden"
+                  >
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#FF4B00]/10 to-transparent"></div>
+                    <div className="relative z-10">
+                      <h4 className="font-bold text-white font-mono uppercase text-sm mb-2 truncate">
+                        {workout.name}
+                      </h4>
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {workout.muscles.slice(0, 2).map((m) => (
+                          <span
+                            key={m}
+                            className="bg-black text-zinc-500 text-[9px] px-2 py-0.5 uppercase font-bold"
+                          >
+                            {muscleLabels[m]?.slice(0, 3) || m.slice(0, 3)}
+                          </span>
+                        ))}
+                        {workout.muscles.length > 2 && (
+                          <span className="bg-black text-zinc-500 text-[9px] px-2 py-0.5 uppercase font-bold">
+                            +{workout.muscles.length - 2}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-4 text-[10px] text-zinc-500 mb-4">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {workout.duration}m
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Flame className="w-3 h-3" />
+                          {workout.estimated_calories}cal
+                        </span>
+                      </div>
+                      <Link
+                        href={`/workout/${workout.id}`}
+                        className="flex items-center justify-center gap-2 w-full py-2 bg-[#FF4B00] hover:bg-[#E04100] text-white text-xs font-bold uppercase tracking-wider transition-colors"
+                      >
+                        <Play className="w-3 h-3" />
+                        Start
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Mobile CTA */}
           <Link

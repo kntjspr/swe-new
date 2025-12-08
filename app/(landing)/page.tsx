@@ -1,10 +1,21 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Link from "next/link";
+import { useUser } from "@stackframe/stack";
 import LandingHeader from "../components/LandingHeader";
 import { ArrowRight, Smartphone, Shield, Star } from "lucide-react";
 
 export default function LandingPage() {
+    const user = useUser();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (user) {
+            router.push("/dashboard");
+        }
+    }, [user, router]);
     return (
         <div className="flex flex-col min-h-screen bg-black text-white font-mono selection:bg-[#FF4B00] selection:text-white">
             <LandingHeader />
