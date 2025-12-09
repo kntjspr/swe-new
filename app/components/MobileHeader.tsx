@@ -30,6 +30,13 @@ export default function MobileHeader() {
                                 className="w-full h-full object-cover grayscale opacity-80"
                             />
                         </div>
+                        <button
+                            onClick={() => stackClientApp.signOut()}
+                            className="p-1 text-zinc-500 hover:text-white transition-colors"
+                            aria-label="Sign out"
+                        >
+                            <LogOut className="w-5 h-5" />
+                        </button>
                     </div>
                 ) : (
                     <Link
