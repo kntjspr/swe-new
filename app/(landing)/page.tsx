@@ -129,7 +129,7 @@ export default function LandingPage() {
                             </div>
                             <div>
                                 <h2 className="text-6xl font-black uppercase mb-6 tracking-tighter">AI<br />Generate</h2>
-                                <p className="text-sm font-mono opacity-70 max-w-sm leading-relaxed border-l-2 border-current pl-4">
+                                <p className="text-sm font-mono opacity-70 max-w-sm leading-relaxed">
                                     Input your time, equipment, and goals. Let our advanced algorithm build the perfect workout for you instantly.
                                 </p>
                             </div>
