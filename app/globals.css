@@ -30,6 +30,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Focus visible — keyboard navigation */
+:focus-visible {
+  outline: 2px solid #FF4B00;
+  outline-offset: 3px;
+}
+
 /* Hide Scrollbar */
 ::-webkit-scrollbar {
   width: 0px;
