@@ -192,19 +192,19 @@ export default function LandingPage() {
                             </div>
                             <div>
                                 <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Sitemap</h4>
-                                <ul className="space-y-4 text-sm font-bold uppercase tracking-wider text-zinc-400">
-                                    <li><Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
-                                    <li><Link href="/generate" className="hover:text-white transition-colors">Generate</Link></li>
-                                    <li><Link href="/history" className="hover:text-white transition-colors">History</Link></li>
-                                    <li><Link href="/settings" className="hover:text-white transition-colors">Settings</Link></li>
+                                <ul className="space-y-2 text-sm font-bold uppercase tracking-wider text-zinc-400">
+                                    <li><Link href="/dashboard" className="inline-block py-2 hover:text-white transition-colors">Dashboard</Link></li>
+                                    <li><Link href="/generate" className="inline-block py-2 hover:text-white transition-colors">Generate</Link></li>
+                                    <li><Link href="/history" className="inline-block py-2 hover:text-white transition-colors">History</Link></li>
+                                    <li><Link href="/settings" className="inline-block py-2 hover:text-white transition-colors">Settings</Link></li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Legal</h4>
-                                <ul className="space-y-4 text-sm font-bold uppercase tracking-wider text-zinc-400">
-                                    <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
-                                    <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
-                                    <li><a href="#" className="hover:text-white transition-colors">Cookies</a></li>
+                                <ul className="space-y-2 text-sm font-bold uppercase tracking-wider text-zinc-400">
+                                    <li><a href="#" className="inline-block py-2 hover:text-white transition-colors">Privacy</a></li>
+                                    <li><a href="#" className="inline-block py-2 hover:text-white transition-colors">Terms</a></li>
+                                    <li><a href="#" className="inline-block py-2 hover:text-white transition-colors">Cookies</a></li>
                                 </ul>
                             </div>
                         </div>

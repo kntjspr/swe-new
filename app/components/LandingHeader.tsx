@@ -28,14 +28,14 @@ export default function LandingHeader() {
             {user ? (
                 <Link
                     href="/dashboard"
-                    className="group relative px-6 py-2 bg-white text-black text-sm font-bold uppercase tracking-wider hover:bg-[#FF4B00] hover:text-white transition-colors"
+                    className="group relative px-6 py-3 min-h-[44px] inline-flex items-center bg-white text-black text-sm font-bold uppercase tracking-wider hover:bg-[#FF4B00] hover:text-white transition-colors"
                 >
                     <span className="relative z-10">Dashboard</span>
                 </Link>
             ) : (
                 <Link
                     href="/handler/sign-in"
-                    className="group relative px-6 py-2 bg-white text-black text-sm font-bold uppercase tracking-wider hover:bg-[#FF4B00] hover:text-white transition-colors"
+                    className="group relative px-6 py-3 min-h-[44px] inline-flex items-center bg-white text-black text-sm font-bold uppercase tracking-wider hover:bg-[#FF4B00] hover:text-white transition-colors"
                 >
                     <span className="relative z-10">Sign In</span>
                 </Link>
