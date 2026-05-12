@@ -72,7 +72,7 @@ export default function LandingPage() {
                             </div>
 
                             <Link href="/handler/sign-up" className="h-32 p-4 bg-[#FF4B00] text-black flex items-center justify-between overflow-hidden relative group cursor-pointer">
-                                <span className="absolute -right-4 -bottom-8 text-9xl font-black opacity-10 group-hover:opacity-20 transition-opacity">GO</span>
+                                <span className="absolute -right-4 -bottom-8 text-9xl font-black opacity-10 group-hover:opacity-20 transition-opacity" aria-hidden="true">GO</span>
                                 <div>
                                     <p className="font-bold text-4xl uppercase tracking-tighter">Join Now</p>
                                     <p className="text-sm font-bold uppercase tracking-widest opacity-70">Free Forever</p>
