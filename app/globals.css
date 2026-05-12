@@ -74,6 +74,13 @@ body {
   animation: marquee 20s linear infinite reverse;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse {
+    animation-play-state: paused;
+  }
+}
+
 /* Range Slider Styling */
 input[type="range"] {
   -webkit-appearance: none;
