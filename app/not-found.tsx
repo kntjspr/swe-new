@@ -39,10 +39,6 @@ export default function NotFound() {
             <div className="absolute bottom-10 left-10 text-zinc-700 text-xs font-bold uppercase tracking-widest hidden md:block">
                 ERR_CODE: 0x404_NOT_FOUND
             </div>
-            <div className="absolute bottom-10 right-10 flex gap-3 items-center hidden md:flex">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
-                <span className="text-xs text-red-500 font-bold uppercase tracking-widest">Signal Lost</span>
-            </div>
         </div>
     )
 }
