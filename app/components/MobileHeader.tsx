@@ -4,6 +4,7 @@ import { useUser } from "@stackframe/stack";
 import { stackClientApp } from "../../stack/client";
 import { LogOut, User } from "lucide-react";
 import Link from "next/link";
+import DefaultAvatar from "./DefaultAvatar";
 
 export default function MobileHeader() {
     const user = useUser();
@@ -24,11 +25,15 @@ export default function MobileHeader() {
                 {user ? (
                     <div className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-zinc-800 border border-zinc-700">
-                            <img
-                                src={user.profileImageUrl || "https://api.dicebear.com/7.x/avataaars/svg?seed=kennykenntttt"}
-                                alt="User"
-                                className="w-full h-full object-cover grayscale opacity-80"
-                            />
+                            {user.profileImageUrl ? (
+                                <img
+                                    src={user.profileImageUrl}
+                                    alt="User"
+                                    className="w-full h-full object-cover grayscale opacity-80"
+                                />
+                            ) : (
+                                <DefaultAvatar className="w-full h-full" />
+                            )}
                         </div>
                         <button
                             onClick={() => stackClientApp.signOut()}

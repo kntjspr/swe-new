@@ -134,7 +134,7 @@ export default function SavedWorkouts() {
                         Saved
                     </h1>
                     <p className="text-xs text-zinc-500 mt-2 uppercase tracking-widest">
-                        Library // {workouts.length} Routines
+                        {workouts.length} Routines
                     </p>
                 </div>
             </header>

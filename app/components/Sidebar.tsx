@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useUser } from "@stackframe/stack";
 import { stackClientApp } from "../../stack/client";
 import Image from "next/image";
+import DefaultAvatar from "./DefaultAvatar";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -73,11 +74,15 @@ export default function Sidebar() {
           <div className="flex items-center gap-4 p-4 border border-zinc-800 bg-zinc-900/50">
             <div className="w-8 h-8 bg-zinc-800 shrink-0 border border-zinc-700 relative">
               {/* User Avatar - Square/Technical Look */}
-              <img
-                src={user.profileImageUrl || "https://api.dicebear.com/7.x/avataaars/svg?seed=kennykenntttt"}
-                alt="User"
-                className="w-full h-full object-cover grayscale opacity-80"
-              />
+              {user.profileImageUrl ? (
+                <img
+                  src={user.profileImageUrl}
+                  alt="User"
+                  className="w-full h-full object-cover grayscale opacity-80"
+                />
+              ) : (
+                <DefaultAvatar className="w-full h-full" />
+              )}
             </div>
             <div className="flex flex-col min-w-0">
               <span className="text-xs font-bold text-white truncate uppercase tracking-tight">

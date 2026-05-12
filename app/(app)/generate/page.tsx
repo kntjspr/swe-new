@@ -272,6 +272,9 @@ export default function Generator() {
                                 step="15"
                                 value={duration}
                                 onChange={(e) => setDuration(Number(e.target.value))}
+                                style={{
+                                    background: `linear-gradient(to right, #FF4B00 ${((duration - 15) / 75) * 100}%, #3f3f46 ${((duration - 15) / 75) * 100}%)`
+                                }}
                             />
                             <div className="flex justify-between text-[10px] text-zinc-300 mt-3 font-bold uppercase tracking-widest">
                                 <span>15m</span>

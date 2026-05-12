@@ -212,10 +212,6 @@ export default function LandingPage() {
                             <p className="text-zinc-600 text-xs font-mono uppercase">
                                 © {new Date().getFullYear()} FitTracker Ops. All Systems Nominal.
                             </p>
-                            <div className="flex gap-4">
-                                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                                <span className="text-xs text-green-500 font-bold uppercase tracking-widest">Server Active</span>
-                            </div>
                         </div>
                     </div>
                 </footer>

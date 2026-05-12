@@ -11,7 +11,7 @@ export default function NotFound() {
             <div className="relative z-10 flex flex-col items-center text-center p-12 border border-zinc-800 bg-zinc-950/80 backdrop-blur-sm max-w-3xl w-full mx-4">
                 <div className="flex items-center gap-3 text-[#FF4B00] uppercase tracking-widest text-sm font-bold mb-12 animate-pulse">
                     <AlertTriangle className="w-5 h-5" />
-                    <span>System Error // 404</span>
+                    <span>404 Not Found</span>
                 </div>
 
                 <h1 className="text-8xl md:text-9xl font-black uppercase tracking-tighter mb-2 text-transparent" style={{ WebkitTextStroke: "2px white" }}>
