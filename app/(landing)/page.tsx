@@ -128,7 +128,7 @@ export default function LandingPage() {
                                 <Hash className="w-12 h-12 opacity-20" />
                             </div>
                             <div>
-                                <h3 className="text-6xl font-black uppercase mb-6 tracking-tighter">AI<br />Generate</h3>
+                                <h2 className="text-6xl font-black uppercase mb-6 tracking-tighter">AI<br />Generate</h2>
                                 <p className="text-sm font-mono opacity-70 max-w-sm leading-relaxed border-l-2 border-current pl-4">
                                     Input your time, equipment, and goals. Let our advanced algorithm build the perfect workout for you instantly.
                                 </p>
@@ -177,9 +177,9 @@ export default function LandingPage() {
                     <div className="max-w-[1800px] mx-auto px-6">
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                             <div className="col-span-2">
-                                <h2 className="text-8xl font-black uppercase tracking-tighter text-zinc-900 select-none">
+                                <p className="text-8xl font-black uppercase tracking-tighter text-zinc-900 select-none" aria-hidden="true">
                                     Fit<br />Tracker
-                                </h2>
+                                </p>
                                 <a
                                     href="https://github.com/kntjspr/swe-new"
                                     target="_blank"
