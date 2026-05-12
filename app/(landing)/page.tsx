@@ -184,7 +184,7 @@ export default function LandingPage() {
                                     href="https://github.com/kntjspr/swe-new"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 mt-8 text-zinc-500 hover:text-[#FF4B00] transition-colors border border-zinc-800 hover:border-[#FF4B00] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
+                                    className="inline-flex items-center gap-2 mt-8 text-zinc-500 hover:text-[#FF4B00] transition-colors border border-zinc-800 hover:border-[#FF4B00] px-4 py-3 rounded-full text-xs font-bold uppercase tracking-widest min-h-[44px]"
                                 >
                                     <Github className="w-4 h-4" />
                                     <span>Codebase</span>
@@ -193,18 +193,18 @@ export default function LandingPage() {
                             <div>
                                 <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Sitemap</h4>
                                 <ul className="space-y-2 text-sm font-bold uppercase tracking-wider text-zinc-400">
-                                    <li><Link href="/dashboard" className="inline-block py-2 hover:text-white transition-colors">Dashboard</Link></li>
-                                    <li><Link href="/generate" className="inline-block py-2 hover:text-white transition-colors">Generate</Link></li>
-                                    <li><Link href="/history" className="inline-block py-2 hover:text-white transition-colors">History</Link></li>
-                                    <li><Link href="/settings" className="inline-block py-2 hover:text-white transition-colors">Settings</Link></li>
+                                    <li><Link href="/dashboard" className="inline-block py-3 hover:text-white transition-colors">Dashboard</Link></li>
+                                    <li><Link href="/generate" className="inline-block py-3 hover:text-white transition-colors">Generate</Link></li>
+                                    <li><Link href="/history" className="inline-block py-3 hover:text-white transition-colors">History</Link></li>
+                                    <li><Link href="/settings" className="inline-block py-3 hover:text-white transition-colors">Settings</Link></li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 className="text-[#FF4B00] text-xs font-bold uppercase tracking-widest mb-6">Legal</h4>
                                 <ul className="space-y-2 text-sm font-bold uppercase tracking-wider text-zinc-400">
-                                    <li><a href="#" className="inline-block py-2 hover:text-white transition-colors">Privacy</a></li>
-                                    <li><a href="#" className="inline-block py-2 hover:text-white transition-colors">Terms</a></li>
-                                    <li><a href="#" className="inline-block py-2 hover:text-white transition-colors">Cookies</a></li>
+                                    <li><a href="#" className="inline-block py-3 hover:text-white transition-colors">Privacy</a></li>
+                                    <li><a href="#" className="inline-block py-3 hover:text-white transition-colors">Terms</a></li>
+                                    <li><a href="#" className="inline-block py-3 hover:text-white transition-colors">Cookies</a></li>
                                 </ul>
                             </div>
                         </div>
