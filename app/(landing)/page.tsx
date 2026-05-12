@@ -39,7 +39,7 @@ export default function LandingPage() {
 
                             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center mt-12">
                                 <Link
-                                    href="/handler/sign-in"
+                                    href="/handler/sign-up"
                                     className="bg-[#FF4B00] hover:bg-white hover:text-black text-white px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-colors flex items-center gap-4"
                                 >
                                     Start Protocol
