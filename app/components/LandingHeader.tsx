@@ -15,6 +15,7 @@ export default function LandingHeader() {
                         src="/logo.png"
                         alt="FitTracker Logo"
                         fill
+                        sizes="40px"
                         className="object-contain"
                     />
                 </div>
