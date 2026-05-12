@@ -29,11 +29,6 @@ export default function LandingPage() {
                         <div className="lg:col-span-8 border-r border-zinc-800 p-8 flex flex-col justify-between relative overflow-hidden">
                             <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none"></div>
 
-                            <div className="flex items-center gap-4 text-[#FF4B00] uppercase tracking-widest text-xs font-bold mb-12">
-                                <span className="w-3 h-3 bg-[#FF4B00]"></span>
-                                <span>System Status: Online</span>
-                            </div>
-
                             <div className="relative z-10">
                                 <h1 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-[0.8] mb-6">
                                     Fit<br />
@@ -129,10 +124,7 @@ export default function LandingPage() {
                     <div className="max-w-[1800px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-[1px] bg-zinc-800 border border-zinc-800">
                         {/* Card 1: AI Generator */}
                         <div className="md:col-span-2 md:row-span-2 bg-zinc-950 p-12 flex flex-col justify-between group hover:bg-[#FF4B00] hover:text-black transition-colors min-h-[500px]">
-                            <div className="flex justify-between items-start">
-                                <div className="border border-current px-3 py-1 text-xs font-bold uppercase tracking-widest">
-                                    01 // Core
-                                </div>
+                            <div className="flex justify-end items-start">
                                 <Hash className="w-12 h-12 opacity-20" />
                             </div>
                             <div>
